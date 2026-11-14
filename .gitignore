@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+.vs/
+# Gira/DaCom-Bibliotheken nie einchecken
+hs_client_framework.dll
+config_framework.dll
+config_lib.dll
+QC.Common.dll
+lib/gira/
