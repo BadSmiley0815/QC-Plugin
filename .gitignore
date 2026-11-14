@@ -8,3 +8,4 @@ config_framework.dll
 config_lib.dll
 QC.Common.dll
 lib/gira/
+*.pdb

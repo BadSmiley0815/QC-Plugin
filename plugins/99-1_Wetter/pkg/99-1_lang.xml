@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <text key="#Sprache" default="Deutsch">
+    <lang id="de" value="Deutsch" />
+    <lang id="en" value="English" />
+  </text>
+</language>

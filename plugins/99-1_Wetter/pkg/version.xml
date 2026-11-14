@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <header>
+    <id>99-1</id>
+    <version>0.1.6</version>
+    <name>#99-1_pluginname</name>
+    <manufacturer>Roman by KNXUF</manufacturer>
+    <contact>https://github.com/BadSmiley0815/QC-Plugin</contact>
+    <support_gipc>false</support_gipc>
+    <support_ncp>false</support_ncp>
+  </header>
+</plugin>

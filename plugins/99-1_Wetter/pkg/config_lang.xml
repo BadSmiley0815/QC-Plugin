@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <text key="#99-1_pluginname" default="Wetter (Open-Meteo + Wetterstation)">
+    <lang id="de" value="Wetter (Open-Meteo + Wetterstation)" />
+    <lang id="en" value="Weather (Open-Meteo + weather station)" />
+  </text>
+
+  <text key="#99-1_title" default="Wetter">
+    <lang id="de" value="Wetter" />
+    <lang id="en" value="Weather" />
+  </text>
+
+  <text key="#99-1_search" default="Ort suchen">
+    <lang id="de" value="Ort suchen" />
+    <lang id="en" value="Search location" />
+  </text>
+  <text key="#99-1_search_info" default="Ortsname eingeben und bestätigen: Der erste Treffer von Open-Meteo wird in Ort, Breite und Länge übernommen (Internet nötig).">
+    <lang id="de" value="Ortsname eingeben und bestätigen: Der erste Treffer von Open-Meteo wird in Ort, Breite und Länge übernommen (Internet nötig)." />
+    <lang id="en" value="Enter a place name and confirm: the first Open-Meteo hit is copied to location, latitude and longitude (needs internet)." />
+  </text>
+  <text key="#99-1_result" default="Suchergebnis">
+    <lang id="de" value="Suchergebnis" />
+    <lang id="en" value="Search result" />
+  </text>
+  <text key="#99-1_result_info" default="Ergebnis der letzten Ortssuche.">
+    <lang id="de" value="Ergebnis der letzten Ortssuche." />
+    <lang id="en" value="Result of the last location search." />
+  </text>
+  <text key="#99-1_search_none" default="Kein Ort gefunden">
+    <lang id="de" value="Kein Ort gefunden" />
+    <lang id="en" value="No location found" />
+  </text>
+  <text key="#99-1_search_more" default="weitere Treffer">
+    <lang id="de" value="weitere Treffer" />
+    <lang id="en" value="more hits" />
+  </text>
+  <text key="#99-1_search_error" default="Ortssuche nicht möglich">
+    <lang id="de" value="Ortssuche nicht möglich" />
+    <lang id="en" value="Location search failed" />
+  </text>
+  <text key="#99-1_no_location" default="Kein Ort eingestellt (Breite/Länge fehlen oder sind ungültig).">
+    <lang id="de" value="Kein Ort eingestellt (Breite/Länge fehlen oder sind ungültig)." />
+    <lang id="en" value="No location set (latitude/longitude missing or invalid)." />
+  </text>
+
+  <text key="#99-1_name" default="Ort">
+    <lang id="de" value="Ort" />
+    <lang id="en" value="Location" />
+  </text>
+  <text key="#99-1_name_info" default="Name des Orts, wie er im QuadClient angezeigt wird.">
+    <lang id="de" value="Name des Orts, wie er im QuadClient angezeigt wird." />
+    <lang id="en" value="Location name as shown in the QuadClient." />
+  </text>
+  <text key="#99-1_lat" default="Breite">
+    <lang id="de" value="Breite" />
+    <lang id="en" value="Latitude" />
+  </text>
+  <text key="#99-1_lat_info" default="Geografische Breite in Grad, z. B. 49.45 (Nord positiv).">
+    <lang id="de" value="Geografische Breite in Grad, z. B. 49.45 (Nord positiv)." />
+    <lang id="en" value="Latitude in degrees, e.g. 49.45 (north positive)." />
+  </text>
+  <text key="#99-1_lon" default="Länge">
+    <lang id="de" value="Länge" />
+    <lang id="en" value="Longitude" />
+  </text>
+  <text key="#99-1_lon_info" default="Geografische Länge in Grad, z. B. 11.08 (Ost positiv).">
+    <lang id="de" value="Geografische Länge in Grad, z. B. 11.08 (Ost positiv)." />
+    <lang id="en" value="Longitude in degrees, e.g. 11.08 (east positive)." />
+  </text>
+
+  <text key="#99-1_interval" default="Aktualisierung">
+    <lang id="de" value="Aktualisierung" />
+    <lang id="en" value="Update interval" />
+  </text>
+  <text key="#99-1_interval_info" default="Wie oft die Vorhersage bei Open-Meteo abgerufen wird.">
+    <lang id="de" value="Wie oft die Vorhersage bei Open-Meteo abgerufen wird." />
+    <lang id="en" value="How often the forecast is fetched from Open-Meteo." />
+  </text>
+  <text key="#99-1_tu" default="Einheit Temperatur">
+    <lang id="de" value="Einheit Temperatur" />
+    <lang id="en" value="Temperature unit" />
+  </text>
+  <text key="#99-1_tu_info" default="Einheit der Temperaturanzeige.">
+    <lang id="de" value="Einheit der Temperaturanzeige." />
+    <lang id="en" value="Unit for temperatures." />
+  </text>
+  <text key="#99-1_wu" default="Einheit Wind">
+    <lang id="de" value="Einheit Wind" />
+    <lang id="en" value="Wind speed unit" />
+  </text>
+  <text key="#99-1_wu_info" default="Einheit der Windgeschwindigkeit in der Anzeige.">
+    <lang id="de" value="Einheit der Windgeschwindigkeit in der Anzeige." />
+    <lang id="en" value="Unit for wind speed in the display." />
+  </text>
+
+  <text key="#99-1_ko_temp" default="KO Temperatur gemessen (DPT 9.001)">
+    <lang id="de" value="KO Temperatur gemessen (DPT 9.001)" />
+    <lang id="en" value="CO temperature measured (DPT 9.001)" />
+  </text>
+  <text key="#99-1_ko_temp_info" default="Gemessene Außentemperatur der Wetterstation in °C, DPT 9.001 (optional; ohne KO gilt Open-Meteo).">
+    <lang id="de" value="Gemessene Außentemperatur der Wetterstation in °C, DPT 9.001 (optional; ohne KO gilt Open-Meteo)." />
+    <lang id="en" value="Measured outdoor temperature of the weather station in °C, DPT 9.001 (optional; without CO Open-Meteo is used)." />
+  </text>
+  <text key="#99-1_ko_feel" default="KO Temperatur gefühlt (DPT 9.001)">
+    <lang id="de" value="KO Temperatur gefühlt (DPT 9.001)" />
+    <lang id="en" value="CO temperature feels like (DPT 9.001)" />
+  </text>
+  <text key="#99-1_ko_feel_info" default="Gefühlte Außentemperatur in °C, DPT 9.001 (optional; ohne KO gilt Open-Meteo).">
+    <lang id="de" value="Gefühlte Außentemperatur in °C, DPT 9.001 (optional; ohne KO gilt Open-Meteo)." />
+    <lang id="en" value="Apparent outdoor temperature in °C, DPT 9.001 (optional; without CO Open-Meteo is used)." />
+  </text>
+  <text key="#99-1_ko_hum" default="KO Luftfeuchte (DPT 9.007)">
+    <lang id="de" value="KO Luftfeuchte (DPT 9.007)" />
+    <lang id="en" value="CO humidity (DPT 9.007)" />
+  </text>
+  <text key="#99-1_ko_hum_info" default="Relative Luftfeuchte in %, DPT 9.007 (optional).">
+    <lang id="de" value="Relative Luftfeuchte in %, DPT 9.007 (optional)." />
+    <lang id="en" value="Relative humidity in %, DPT 9.007 (optional)." />
+  </text>
+  <text key="#99-1_ko_wind" default="KO Windgeschwindigkeit (DPT 9.005 / 9.028)">
+    <lang id="de" value="KO Windgeschwindigkeit (DPT 9.005 / 9.028)" />
+    <lang id="en" value="CO wind speed (DPT 9.005 / 9.028)" />
+  </text>
+  <text key="#99-1_ko_wind_info" default="Windgeschwindigkeit der Wetterstation, DPT 9.005 (m/s) oder 9.028 (km/h), optional; Einheit in der nächsten Zeile wählen.">
+    <lang id="de" value="Windgeschwindigkeit der Wetterstation, DPT 9.005 (m/s) oder 9.028 (km/h), optional; Einheit in der nächsten Zeile wählen." />
+    <lang id="en" value="Wind speed of the weather station, DPT 9.005 (m/s) or 9.028 (km/h), optional; choose the unit in the next line." />
+  </text>
+  <text key="#99-1_kowu" default="Einheit des Wind-KO">
+    <lang id="de" value="Einheit des Wind-KO" />
+    <lang id="en" value="Unit of the wind CO" />
+  </text>
+  <text key="#99-1_kowu_info" default="In welcher Einheit die Wetterstation die Windgeschwindigkeit sendet.">
+    <lang id="de" value="In welcher Einheit die Wetterstation die Windgeschwindigkeit sendet." />
+    <lang id="en" value="Unit in which the weather station sends the wind speed." />
+  </text>
+  <text key="#99-1_ko_dir" default="KO Windrichtung (DPT 5.003)">
+    <lang id="de" value="KO Windrichtung (DPT 5.003)" />
+    <lang id="en" value="CO wind direction (DPT 5.003)" />
+  </text>
+  <text key="#99-1_ko_dir_info" default="Windrichtung in Grad (0 = Nord), DPT 5.003; jeder Zahlenwert in Grad geht (optional).">
+    <lang id="de" value="Windrichtung in Grad (0 = Nord), DPT 5.003; jeder Zahlenwert in Grad geht (optional)." />
+    <lang id="en" value="Wind direction in degrees (0 = north), DPT 5.003; any numeric value in degrees works (optional)." />
+  </text>
+  <text key="#99-1_ko_rain" default="KO Regen (DPT 1.x)">
+    <lang id="de" value="KO Regen (DPT 1.x)" />
+    <lang id="en" value="CO rain (DPT 1.x)" />
+  </text>
+  <text key="#99-1_ko_rain_info" default="Regenmelder, 1 Bit (DPT 1.001/1.002/1.005): 1 = Regen, 0 = trocken (optional).">
+    <lang id="de" value="Regenmelder, 1 Bit (DPT 1.001/1.002/1.005): 1 = Regen, 0 = trocken (optional)." />
+    <lang id="en" value="Rain sensor, 1 bit (DPT 1.001/1.002/1.005): 1 = rain, 0 = dry (optional)." />
+  </text>
+  <text key="#99-1_ko_lux" default="KO Helligkeit gesamt (DPT 9.004)">
+    <lang id="de" value="KO Helligkeit gesamt (DPT 9.004)" />
+    <lang id="en" value="CO brightness overall (DPT 9.004)" />
+  </text>
+  <text key="#99-1_ko_lux_info" default="Eine Helligkeit in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Wert, z. B. mit GPS). Sind Richtungs-KOs zugewiesen, werden diese angezeigt.">
+    <lang id="de" value="Eine Helligkeit in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Wert, z. B. mit GPS). Sind Richtungs-KOs zugewiesen, werden diese angezeigt." />
+    <lang id="en" value="A single brightness in lux, DPT 9.004 (optional; for weather stations with one value, e.g. with GPS). If direction COs are assigned, those are shown." />
+  </text>
+  <text key="#99-1_ko_lux_n" default="KO Helligkeit Nord (DPT 9.004)">
+    <lang id="de" value="KO Helligkeit Nord (DPT 9.004)" />
+    <lang id="en" value="CO brightness north (DPT 9.004)" />
+  </text>
+  <text key="#99-1_ko_lux_n_info" default="Helligkeit Richtung Nord in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung).">
+    <lang id="de" value="Helligkeit Richtung Nord in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung)." />
+    <lang id="en" value="Brightness towards north in lux, DPT 9.004 (optional; for weather stations with one sensor per direction)." />
+  </text>
+  <text key="#99-1_ko_lux_e" default="KO Helligkeit Ost (DPT 9.004)">
+    <lang id="de" value="KO Helligkeit Ost (DPT 9.004)" />
+    <lang id="en" value="CO brightness east (DPT 9.004)" />
+  </text>
+  <text key="#99-1_ko_lux_e_info" default="Helligkeit Richtung Ost in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung).">
+    <lang id="de" value="Helligkeit Richtung Ost in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung)." />
+    <lang id="en" value="Brightness towards east in lux, DPT 9.004 (optional; for weather stations with one sensor per direction)." />
+  </text>
+  <text key="#99-1_ko_lux_s" default="KO Helligkeit Süd (DPT 9.004)">
+    <lang id="de" value="KO Helligkeit Süd (DPT 9.004)" />
+    <lang id="en" value="CO brightness south (DPT 9.004)" />
+  </text>
+  <text key="#99-1_ko_lux_s_info" default="Helligkeit Richtung Süd in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung).">
+    <lang id="de" value="Helligkeit Richtung Süd in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung)." />
+    <lang id="en" value="Brightness towards south in lux, DPT 9.004 (optional; for weather stations with one sensor per direction)." />
+  </text>
+  <text key="#99-1_ko_lux_w" default="KO Helligkeit West (DPT 9.004)">
+    <lang id="de" value="KO Helligkeit West (DPT 9.004)" />
+    <lang id="en" value="CO brightness west (DPT 9.004)" />
+  </text>
+  <text key="#99-1_ko_lux_w_info" default="Helligkeit Richtung West in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung).">
+    <lang id="de" value="Helligkeit Richtung West in Lux, DPT 9.004 (optional; für Wetterstationen mit einem Sensor je Himmelsrichtung)." />
+    <lang id="en" value="Brightness towards west in lux, DPT 9.004 (optional; for weather stations with one sensor per direction)." />
+  </text>
+  <text key="#99-1_ko_press" default="KO Luftdruck (DPT 9.006)">
+    <lang id="de" value="KO Luftdruck (DPT 9.006)" />
+    <lang id="en" value="CO air pressure (DPT 9.006)" />
+  </text>
+  <text key="#99-1_ko_press_info" default="Luftdruck, DPT 9.006 (Pa) oder ein Wert in hPa; Werte über 2000 gelten als Pa. Anzeige in hPa (optional).">
+    <lang id="de" value="Luftdruck, DPT 9.006 (Pa) oder ein Wert in hPa; Werte über 2000 gelten als Pa. Anzeige in hPa (optional)." />
+    <lang id="en" value="Air pressure, DPT 9.006 (Pa) or a value in hPa; values above 2000 are taken as Pa. Shown in hPa (optional)." />
+  </text>
+</language>
