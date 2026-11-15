@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Weather (Open-Meteo + weather station) – Help</title>
+<link rel="stylesheet" href="../../hilfe.css">
+</head>
+<body>
+<header>
+  <span class="tag">QC plugin 99-1</span>
+  <h1>Weather (Open-Meteo + weather station)</h1>
+</header>
+
+<p class="lead">Shows the current weather on the left and a 7-day forecast on the right (4 days visible, browse with ◀ ▶) in the Windows
+QuadClient. The forecast comes from Open-Meteo (free, no key, data CC BY 4.0); current values can come from your own
+weather station via communication objects (COs).</p>
+
+<figure>
+  <img src="../../../docs/img/99-1_wetter_dunkel.png" alt="">
+  <figcaption>The plugin in the QuadClient with sample data: “now” on the left, the forecast on the right, place, date and time below.</figcaption>
+</figure>
+
+<h2>Setup</h2>
+<ol class="steps">
+  <li>On the “Quadrants” tab select the entry that uses this plugin.</li>
+  <li>Enter a place name in the search field: the first match fills in place, latitude and longitude. Coordinates can also be
+      entered by hand.</li>
+  <li>With a KNX weather station: drag the COs from the project onto the CO fields. All COs are optional; where one is
+      missing, the Open-Meteo value is used (brightness and air pressure only come from the station).</li>
+  <li>Transfer the project and restart the QuadClient.</li>
+</ol>
+
+<figure>
+  <div class="mock">
+    <div class="bar">Weather</div>
+    <div class="grid">
+      <div>Search place</div><div class="hl">Nuremberg <span class="pin">2</span></div>
+      <div>Place</div><div>Nuremberg</div>
+      <div>Latitude</div><div>49.4542</div>
+      <div>Longitude</div><div>11.0775</div>
+      <div>Update interval</div><div>60 minutes</div>
+      <div>Unit temperature</div><div>°C</div>
+      <div>Unit wind</div><div>km/h</div>
+      <div>CO temperature measured (DPT 9.001)</div><div class="hl">Weather station temperature <span class="pin">3</span></div>
+      <div>CO humidity (DPT 9.007)</div><div>Weather station humidity</div>
+      <div>CO wind speed (DPT 9.005)</div><div>Weather station wind</div>
+      <div>Unit of the wind CO</div><div>m/s</div>
+    </div>
+  </div>
+  <figcaption>What it looks like in the Experte (redrawn, with sample values, not all fields). The numbers refer to the steps above.</figcaption>
+</figure>
+
+<h2>Fields</h2>
+<table>
+  <tr><th style="width:34%">Field</th><th>Meaning</th></tr>
+  <tr><td>Search place</td><td>Place name; the first Open-Meteo match is taken.</td></tr>
+  <tr><td>Place, latitude, longitude</td><td>Display name and coordinates in degrees (point or comma).</td></tr>
+  <tr><td>Update interval</td><td>15 minutes to 6 hours.</td></tr>
+  <tr><td>Unit temperature / wind</td><td>°C or °F, km/h or m/s – for display.</td></tr>
+  <tr><td>Unit of the wind CO</td><td>m/s or km/h – the unit the station sends.</td></tr>
+</table>
+
+<h2>Weather station COs</h2>
+<table>
+  <tr><th style="width:34%">CO</th><th style="width:22%">DPT</th><th>Value</th></tr>
+  <tr><td>Temperature measured</td><td>9.001</td><td>°C</td></tr>
+  <tr><td>Temperature felt</td><td>9.001</td><td>°C</td></tr>
+  <tr><td>Humidity</td><td>9.007</td><td>%</td></tr>
+  <tr><td>Wind speed</td><td>9.005 or 9.028</td><td>m/s or km/h (set the unit)</td></tr>
+  <tr><td>Wind direction</td><td>5.003</td><td>degrees, 0 = north</td></tr>
+  <tr><td>Rain</td><td>1.001 / 1.002 / 1.005</td><td>1 = rain, 0 = dry</td></tr>
+  <tr><td>Brightness total</td><td>9.004</td><td>lux – stations with one value</td></tr>
+  <tr><td>Brightness north / east / south / west</td><td>9.004</td><td>lux – stations with one sensor per direction; assign only those present</td></tr>
+  <tr><td>Air pressure</td><td>9.006</td><td>Pa (values above 2000 are taken as Pa) or hPa; shown in hPa</td></tr>
+</table>
+
+<h2>Notes</h2>
+<ul>
+  <li>The QuadClient needs internet access (<code>api.open-meteo.com</code>, HTTPS). Without a connection the last forecast
+      stays on screen with its time stamp and the bar shows “offline”.</li>
+  <li>The place applies to all devices showing this quadrant.</li>
+  <li>The plugin runs in the Windows QuadClient only. Gira's apps for iOS, Android and G1 do not load third-party plugins.</li>
+  <li>Errors are written to the QuadClient's <code>error.log</code> (lines with “Wetter 99-1”).</li>
+</ul>
+<footer>Independent project, not by Gira and not supported by Gira · github.com/BadSmiley0815/QC-Plugin · weather data: Open-Meteo (CC BY 4.0) · licence GPL-3.0</footer>
+</body>
+</html>

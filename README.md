@@ -12,6 +12,7 @@ QuadClient-Plugin-SDK, nutzbar im Windows-QuadClient und im [QC-Client](https://
 | ID (vorläufig) | Name | Stand |
 |---|---|---|
 | 99-1 | Wetter | läuft im Windows-QuadClient (HS+FS Experte 4.13, QuadClient 5.5) – Vorhersage (Open-Meteo) + aktuelle Werte der eigenen Wetterstation (KOs). Download: [`dist/99-1_Wetter.hsp`](dist/99-1_Wetter.hsp) |
+| 99-2 | Kamera | läuft im Windows-QuadClient mit einer Axis-Kamera (weitere Hersteller noch nicht erprobt) – RTSP (H.264/H.265), ONVIF-Abfrage, MJPEG und Einzelbilder. Download: [`dist/99-2_Kamera.hsp`](dist/99-2_Kamera.hsp) |
 
 ## 99-1 Wetter
 
@@ -99,7 +100,66 @@ Die Einstellungen einer Instanz liegen auf dem HomeServer unter
 `rain` (1 Bit, 1 = Regen), `lux` (Lux, ein Wert), `lux_n` / `lux_e` / `lux_s` / `lux_w` (Lux je Himmelsrichtung), `press` (hPa). `tag` ist die KO-ID des HomeServers als Zahl – dieselbe,
 mit der sich der QuadClient für Wertänderungen anmeldet.
 
-### Bauen
+## 99-2 Kamera
+
+![Kamera-Plugin, Beispielbild](docs/img/99-2_kamera_dunkel.png)
+
+Ergänzung zu Giras „Kameras 2.0“ (0-2), das nur JPEG und MJPEG per URL kennt. (Das Bild zeigt eine gezeichnete Beispielszene der
+nachgebauten Kamera aus dem Vorschauprogramm.)
+
+> **Stand:** Im Experten 4.13 und im Windows-QuadClient 5.5 mit einer Axis P1468-LE erprobt (ONVIF-Abfrage über
+> HTTPS, RTSP H.264 mit 3840 × 2160). **Noch nicht** erprobt: Hikvision, Dahua, Vollbild, KO „Kamera anzeigen“,
+> MJPEG und Einzelbilder an echten Kameras.
+
+**Axis:** ONVIF hat eigene Konten (Weboberfläche der Kamera, System → ONVIF → „Konto hinzufügen“), und ab Werk gibt
+es je Codec nur ein Profil in voller Auflösung. Dort am besten ein zweites ONVIF-Medienprofil mit H.264 und etwa
+1280 × 720 anlegen und die Abfrage im Experten wiederholen – Einzelheiten in der Hilfe des Plugins.
+
+- **RTSP** mit H.264, RTP über die RTSP-Verbindung (TCP), Anmeldung Digest oder Basic. Dekodiert wird mit dem
+  H.264-Decoder von Windows (Media Foundation) – keine mitgelieferten Bibliotheken. H.265 ist vorbereitet, braucht
+  auf dem Rechner die „HEVC-Videoerweiterung“ und ist ungeprüft.
+- **ONVIF** im Experten: Adresse, Benutzer und Kennwort eintragen, „Kamera jetzt abfragen“ auf „Ja“ stellen –
+  das Plugin trägt die RTSP-Adressen (kleiner Stream für den Quadranten, großer für das Vollbild) und die
+  Einzelbild-Adresse ein.
+- **MJPEG** (HTTP) und **Einzelbilder** (JPEG) wie bisher, mit Anmeldung Basic/Digest und HTTPS.
+- **Mehrere Kameras** je Instanz (Liste im Experten), im QuadClient mit ◀ ▶ blättern; es läuft nur der Strom der
+  sichtbaren Kamera. Ein Klick ins Bild schaltet das **Vollbild**.
+- **KO „Kamera anzeigen“** je Kamera: ein Wert ungleich 0 (Klingel, Bewegungsmelder) schaltet auf diese Kamera um.
+- Nach Verbindungsfehlern verbindet sich das Plugin von selbst neu; die Meldung steht über dem abgedunkelten letzten Bild.
+
+Noch nicht enthalten: Schwenken/Neigen/Zoomen, Vierfachansicht, Ton, RTP über UDP, RTSP über TLS (`rtsps://`).
+
+**Kennwort:** Benutzer und Kennwort der Kamera stehen lesbar in den Projektdaten und auf dem HomeServer (wie bei
+Giras Plugin die URL mit `Benutzer:Kennwort@`). Deshalb in der Kamera einen eigenen Benutzer anlegen, der nur
+ansehen darf. Zertifikate der Kameras werden bei HTTPS nicht geprüft (selbst ausgestellt).
+
+### Einstellungsformat (Projektdaten)
+
+```xml
+<project version="1">
+  <cam name="Einfahrt" host="192.168.1.20" port="80" user="viewer" pass="…" mode="auto"
+       rtsp="rtsp://192.168.1.20:554/Streaming/Channels/102" rtsp_full="rtsp://192.168.1.20:554/Streaming/Channels/101"
+       mjpeg="" jpeg="http://192.168.1.20/onvif/snapshot" refresh="1000">
+    <ko id="show" tag="1234" />
+  </cam>
+</project>
+```
+
+| Attribut | Werte | Bedeutung |
+|---|---|---|
+| `version` | `1` | Version dieses Formats |
+| `name` | Text | Anzeigename der Kamera |
+| `host`, `port` | Adresse, 1 … 65535 | Kamera und Port ihres ONVIF-Dienstes (nur für die Abfrage im Experten) |
+| `user`, `pass` | Text | Anmeldung für RTSP und HTTP |
+| `mode` | `auto` \| `rtsp` \| `mjpeg` \| `jpeg` | Bildquelle; `auto` = RTSP, sonst MJPEG, sonst Einzelbilder – je nachdem, was eingetragen ist |
+| `rtsp`, `rtsp_full` | `rtsp://…` | Stream für den Quadranten und für das Vollbild (leer = der jeweils andere) |
+| `mjpeg`, `jpeg` | `http(s)://…` | MJPEG-Strom und Einzelbild |
+| `refresh` | 100 … 60000 | Abstand der Einzelbilder in Millisekunden |
+
+Die Reihenfolge der `<cam>` ist die Reihenfolge beim Blättern. `<ko id="show">` steht nur bei zugewiesenem KO;
+`tag` ist die KO-ID des HomeServers. Für den QC-Client im Browser sind `jpeg` und `mjpeg` nutzbar, RTSP kann kein Browser.
+
+## Bauen
 
 Braucht nur Windows mit .NET Framework 4 (kein Visual Studio, kein SDK) und die eigene Gira-Installation:
 
@@ -108,18 +168,26 @@ Braucht nur Windows mit .NET Framework 4 (kein Visual Studio, kein SDK) und die 
 ```
 
 Die beiden Pfade sind nur beim ersten Mal nötig (die Bibliotheken werden nach `lib\gira` kopiert, das nicht
-eingecheckt wird). Ergebnis: `dist\99-1_Wetter.hsp`. Jeder Bau erhöht die letzte Stelle der Version in
-`version.xml` (`-NoBump` lässt sie stehen), prüft die Einstellungen mit `ConfigTest` und zeichnet die
-Vorschaubilder mit `Vorschau` – beides ohne Experte und HomeServer. `-Live` fragt dabei wirklich bei Open-Meteo an.
+eingecheckt wird). Ergebnis: `dist\99-1_Wetter.hsp` und `dist\99-2_Kamera.hsp`; `-Plugin 99-2` baut nur eines.
+Jeder Bau erhöht die letzte Stelle der Version in der `version.xml` der gebauten Plugins (`-NoBump` lässt sie
+stehen), prüft die Einstellungen mit `ConfigTest` und zeichnet die Vorschaubilder mit `Vorschau` – ohne Experte
+und HomeServer. `-Live` fragt bei 99-1 wirklich bei Open-Meteo an. Die Hilfe (`plugins\<Plugin>\help\*.html`)
+druckt Microsoft Edge ohne Fenster als PDF ins Paket; ohne Edge entsteht das Paket ohne Hilfe.
 
-### Entwickeln und Fehlersuche
+Die Tests von 99-2 laufen gegen eine nachgebaute Kamera auf `127.0.0.1` (`tools\TestKamera.cs`: RTSP mit
+Digest-Anmeldung, ONVIF, MJPEG, Einzelbild); den H.264-Strom dafür erzeugt der Encoder von Windows.
+
+Eine echte Kamera prüft `bin\99-2\KameraTest.exe <Adresse> <Benutzer>` (ONVIF-Abfrage, RTSP, Decoder, Einzelbild).
+Das Kennwort wird verdeckt abgefragt und nicht gespeichert; das dekodierte Bild landet als PNG in `bin\99-2\`.
+
+## Entwickeln und Fehlersuche
 
 1. Einbauen wie oben unter „Installation in Kürze“.
 2. Zum Entwickeln ohne erneutes Übertragen kennt der Windows-QuadClient in seiner `config.xml` den Eintrag
    `<assembly path="..\quad_assembly\" />`. **Achtung:** Dann lädt er *alle* Plugin-DLLs aus diesem Ordner –
    dort müssen also auch die `<ID>_client.dll` der übrigen Plugins des Projekts liegen (aus den `.hsp` unter
-   `Projekt\qc_hsp\`). `.\build.ps1 -DeployTo <Ordner>` kopiert die eigene Client-DLL dorthin.
-3. Fehler des Plugins stehen im `error.log` des QuadClients (Zeilen mit „Wetter 99-1“).
+   `Projekt\qc_hsp\`). `.\build.ps1 -DeployTo <Ordner>` kopiert die eigenen Client-DLLs dorthin.
+3. Fehler der Plugins stehen im `error.log` des QuadClients (Zeilen mit „Wetter 99-1“ bzw. „Kamera 99-2“).
 
 ## Aufbau eines Plugins (.hsp)
 
@@ -130,7 +198,7 @@ Eine `.hsp` ist ein ZIP mit:
 | `version.xml` | ID, Version, Name, Hersteller |
 | `interface.xml` | Klassennamen der beiden Assemblies (`nsclient`, `nsconfig`) |
 | `<ID>_client.dll` | Anzeige im QuadClient (WPF, implementiert `IQuadContent`) |
-| `plugin_config.dll` | Einstellungen im Experten/QuadConfig (implementiert `IPlugin`) |
+| `plugin_config.dll` | Einstellungen im Experten/QuadConfig (implementiert `IPlugin`). Der Assemblyname muss je Plugin verschieden sein (hier `<ID>_config`), sonst lädt der Experte nur die erste |
 | `<ID>_lang.xml`, `config_lang.xml` | Texte für QuadClient bzw. Experte |
 | `config_data.xml` | Daten für den Einstellungsdialog |
 | `design_<n>/<ID>_design.xml`, Symbole | Darstellung |

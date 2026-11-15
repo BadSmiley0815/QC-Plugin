@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <text key="#99-2_pluginname" default="Kamera (RTSP / ONVIF / MJPEG)">
+    <lang id="de" value="Kamera (RTSP / ONVIF / MJPEG)" />
+    <lang id="en" value="Camera (RTSP / ONVIF / MJPEG)" />
+  </text>
+  <text key="#99-2_title" default="Kameras">
+    <lang id="de" value="Kameras" />
+    <lang id="en" value="Cameras" />
+  </text>
+  <text key="#99-2_cam_title" default="Kamera">
+    <lang id="de" value="Kamera" />
+    <lang id="en" value="Camera" />
+  </text>
+  <text key="#99-2_new_cam" default="Kamera">
+    <lang id="de" value="Kamera" />
+    <lang id="en" value="Camera" />
+  </text>
+
+  <text key="#99-2_hint" default="Hinweis">
+    <lang id="de" value="Hinweis" />
+    <lang id="en" value="Note" />
+  </text>
+  <text key="#99-2_hint_info" default="Jede Kamera ist ein Eintrag in der Liste dieses Plugins. Im QuadClient wird zwischen den Kameras geblättert.">
+    <lang id="de" value="Jede Kamera ist ein Eintrag in der Liste dieses Plugins. Im QuadClient wird zwischen den Kameras geblättert." />
+    <lang id="en" value="Each camera is an entry in the list of this plugin. The QuadClient pages through the cameras." />
+  </text>
+  <text key="#99-2_hint_text" default="Kameras in der Liste anlegen">
+    <lang id="de" value="Kameras in der Liste anlegen" />
+    <lang id="en" value="Add cameras to the list" />
+  </text>
+
+  <text key="#99-2_name" default="Name">
+    <lang id="de" value="Name" />
+    <lang id="en" value="Name" />
+  </text>
+  <text key="#99-2_name_info" default="Name der Kamera, wie er im QuadClient angezeigt wird.">
+    <lang id="de" value="Name der Kamera, wie er im QuadClient angezeigt wird." />
+    <lang id="en" value="Name of the camera as shown in the QuadClient." />
+  </text>
+  <text key="#99-2_host" default="Adresse der Kamera">
+    <lang id="de" value="Adresse der Kamera" />
+    <lang id="en" value="Camera address" />
+  </text>
+  <text key="#99-2_host_info" default="IP-Adresse oder Name der Kamera, z. B. 192.168.1.20. Wird für die ONVIF-Abfrage gebraucht.">
+    <lang id="de" value="IP-Adresse oder Name der Kamera, z. B. 192.168.1.20. Wird für die ONVIF-Abfrage gebraucht." />
+    <lang id="en" value="IP address or host name of the camera, e.g. 192.168.1.20. Needed for the ONVIF query." />
+  </text>
+  <text key="#99-2_port" default="ONVIF-Port">
+    <lang id="de" value="ONVIF-Port" />
+    <lang id="en" value="ONVIF port" />
+  </text>
+  <text key="#99-2_port_info" default="Port des ONVIF-Dienstes, meist 80 (Hikvision und Dahua: 80, manche Geräte 8000 oder 8899).">
+    <lang id="de" value="Port des ONVIF-Dienstes, meist 80 (Hikvision und Dahua: 80, manche Geräte 8000 oder 8899)." />
+    <lang id="en" value="Port of the ONVIF service, usually 80 (some devices use 8000 or 8899)." />
+  </text>
+  <text key="#99-2_user" default="Benutzer">
+    <lang id="de" value="Benutzer" />
+    <lang id="en" value="User" />
+  </text>
+  <text key="#99-2_user_info" default="Benutzer der Kamera für ONVIF, RTSP und HTTP. Am besten ein eigener Benutzer, der nur ansehen darf.">
+    <lang id="de" value="Benutzer der Kamera für ONVIF, RTSP und HTTP. Am besten ein eigener Benutzer, der nur ansehen darf." />
+    <lang id="en" value="Camera user for ONVIF, RTSP and HTTP. Preferably a separate view-only user." />
+  </text>
+  <text key="#99-2_pass" default="Kennwort">
+    <lang id="de" value="Kennwort" />
+    <lang id="en" value="Password" />
+  </text>
+  <text key="#99-2_pass_info" default="Kennwort dieses Benutzers. Achtung: Es steht lesbar im Projekt und auf dem HomeServer – deshalb einen Benutzer nehmen, der nur ansehen darf.">
+    <lang id="de" value="Kennwort dieses Benutzers. Achtung: Es steht lesbar im Projekt und auf dem HomeServer – deshalb einen Benutzer nehmen, der nur ansehen darf." />
+    <lang id="en" value="Password of this user. Note: it is stored readable in the project and on the HomeServer – so use a view-only user." />
+  </text>
+  <text key="#99-2_query" default="Kamera jetzt abfragen (ONVIF)">
+    <lang id="de" value="Kamera jetzt abfragen (ONVIF)" />
+    <lang id="en" value="Query camera now (ONVIF)" />
+  </text>
+  <text key="#99-2_query_info" default="Auf „Ja“ stellen: Das Plugin fragt die Kamera über ONVIF ab und trägt die RTSP-Adressen und die Adresse für Einzelbilder ein. Danach steht das Feld wieder auf „Nein“.">
+    <lang id="de" value="Auf „Ja“ stellen: Das Plugin fragt die Kamera über ONVIF ab und trägt die RTSP-Adressen und die Adresse für Einzelbilder ein. Danach steht das Feld wieder auf „Nein“." />
+    <lang id="en" value="Set to “Yes”: the plugin queries the camera via ONVIF and fills in the RTSP addresses and the snapshot address. The field then returns to “No”." />
+  </text>
+  <text key="#99-2_result" default="Ergebnis der Abfrage">
+    <lang id="de" value="Ergebnis der Abfrage" />
+    <lang id="en" value="Query result" />
+  </text>
+  <text key="#99-2_result_info" default="Ergebnis der letzten ONVIF-Abfrage.">
+    <lang id="de" value="Ergebnis der letzten ONVIF-Abfrage." />
+    <lang id="en" value="Result of the last ONVIF query." />
+  </text>
+  <text key="#99-2_mode" default="Bildquelle">
+    <lang id="de" value="Bildquelle" />
+    <lang id="en" value="Image source" />
+  </text>
+  <text key="#99-2_mode_info" default="Automatisch: RTSP, wenn eine RTSP-Adresse eingetragen ist, sonst MJPEG, sonst Einzelbilder.">
+    <lang id="de" value="Automatisch: RTSP, wenn eine RTSP-Adresse eingetragen ist, sonst MJPEG, sonst Einzelbilder." />
+    <lang id="en" value="Automatic: RTSP if an RTSP address is set, otherwise MJPEG, otherwise single images." />
+  </text>
+  <text key="#99-2_mode_auto" default="Automatisch">
+    <lang id="de" value="Automatisch" />
+    <lang id="en" value="Automatic" />
+  </text>
+  <text key="#99-2_mode_rtsp" default="RTSP (H.264 / H.265)">
+    <lang id="de" value="RTSP (H.264 / H.265)" />
+    <lang id="en" value="RTSP (H.264 / H.265)" />
+  </text>
+  <text key="#99-2_mode_mjpeg" default="MJPEG (HTTP)">
+    <lang id="de" value="MJPEG (HTTP)" />
+    <lang id="en" value="MJPEG (HTTP)" />
+  </text>
+  <text key="#99-2_mode_jpeg" default="Einzelbilder (JPEG)">
+    <lang id="de" value="Einzelbilder (JPEG)" />
+    <lang id="en" value="Single images (JPEG)" />
+  </text>
+  <text key="#99-2_rtsp" default="RTSP-Adresse Quadrant">
+    <lang id="de" value="RTSP-Adresse Quadrant" />
+    <lang id="en" value="RTSP address quadrant" />
+  </text>
+  <text key="#99-2_rtsp_info" default="rtsp://…-Adresse des kleinen Streams für die Anzeige im Quadranten (H.264 empfohlen). Benutzer und Kennwort kommen aus den Feldern oben.">
+    <lang id="de" value="rtsp://…-Adresse des kleinen Streams für die Anzeige im Quadranten (H.264 empfohlen). Benutzer und Kennwort kommen aus den Feldern oben." />
+    <lang id="en" value="rtsp://… address of the small stream for the quadrant (H.264 recommended). User and password are taken from the fields above." />
+  </text>
+  <text key="#99-2_rtsp_full" default="RTSP-Adresse Vollbild">
+    <lang id="de" value="RTSP-Adresse Vollbild" />
+    <lang id="en" value="RTSP address full screen" />
+  </text>
+  <text key="#99-2_rtsp_full_info" default="rtsp://…-Adresse des großen Streams für das Vollbild (optional; leer = wie Quadrant).">
+    <lang id="de" value="rtsp://…-Adresse des großen Streams für das Vollbild (optional; leer = wie Quadrant)." />
+    <lang id="en" value="rtsp://… address of the large stream for full screen (optional; empty = same as quadrant)." />
+  </text>
+  <text key="#99-2_mjpeg" default="MJPEG-Adresse">
+    <lang id="de" value="MJPEG-Adresse" />
+    <lang id="en" value="MJPEG address" />
+  </text>
+  <text key="#99-2_mjpeg_info" default="http://…-Adresse eines MJPEG-Streams (optional), z. B. Axis: http://Adresse/axis-cgi/mjpg/video.cgi">
+    <lang id="de" value="http://…-Adresse eines MJPEG-Streams (optional), z. B. Axis: http://Adresse/axis-cgi/mjpg/video.cgi" />
+    <lang id="en" value="http://… address of an MJPEG stream (optional), e.g. Axis: http://address/axis-cgi/mjpg/video.cgi" />
+  </text>
+  <text key="#99-2_jpeg" default="Einzelbild-Adresse">
+    <lang id="de" value="Einzelbild-Adresse" />
+    <lang id="en" value="Snapshot address" />
+  </text>
+  <text key="#99-2_jpeg_info" default="http://…-Adresse für Einzelbilder (JPEG). Wird von der ONVIF-Abfrage eingetragen; auch der QC-Client im Browser benutzt sie.">
+    <lang id="de" value="http://…-Adresse für Einzelbilder (JPEG). Wird von der ONVIF-Abfrage eingetragen; auch der QC-Client im Browser benutzt sie." />
+    <lang id="en" value="http://… address for single images (JPEG). Filled in by the ONVIF query; also used by the QC-Client in the browser." />
+  </text>
+  <text key="#99-2_refresh" default="Abstand Einzelbilder [ms]">
+    <lang id="de" value="Abstand Einzelbilder [ms]" />
+    <lang id="en" value="Snapshot interval [ms]" />
+  </text>
+  <text key="#99-2_refresh_info" default="Abstand in Millisekunden, in dem Einzelbilder abgeholt werden (100 … 60000). Für RTSP und MJPEG ohne Bedeutung.">
+    <lang id="de" value="Abstand in Millisekunden, in dem Einzelbilder abgeholt werden (100 … 60000). Für RTSP und MJPEG ohne Bedeutung." />
+    <lang id="en" value="Interval in milliseconds for fetching single images (100 … 60000). Not used for RTSP and MJPEG." />
+  </text>
+  <text key="#99-2_ko_show" default="KO Kamera anzeigen (DPT 1.x)">
+    <lang id="de" value="KO Kamera anzeigen (DPT 1.x)" />
+    <lang id="en" value="CO show camera (DPT 1.x)" />
+  </text>
+  <text key="#99-2_ko_show_info" default="Optional: Sendet dieses KO einen Wert ungleich 0 (z. B. Klingel oder Bewegungsmelder), schaltet die Anzeige auf diese Kamera um.">
+    <lang id="de" value="Optional: Sendet dieses KO einen Wert ungleich 0 (z. B. Klingel oder Bewegungsmelder), schaltet die Anzeige auf diese Kamera um." />
+    <lang id="en" value="Optional: when this object sends a value other than 0 (e.g. door bell or motion detector), the display switches to this camera." />
+  </text>
+
+  <text key="#99-2_no" default="Nein">
+    <lang id="de" value="Nein" />
+    <lang id="en" value="No" />
+  </text>
+  <text key="#99-2_yes" default="Ja">
+    <lang id="de" value="Ja" />
+    <lang id="en" value="Yes" />
+  </text>
+  <text key="#99-2_query_nohost" default="Bitte zuerst die Adresse der Kamera eintragen">
+    <lang id="de" value="Bitte zuerst die Adresse der Kamera eintragen" />
+    <lang id="en" value="Please enter the camera address first" />
+  </text>
+  <text key="#99-2_query_none" default="Die Kamera meldet kein Videoprofil mit H.264 oder H.265">
+    <lang id="de" value="Die Kamera meldet kein Videoprofil mit H.264 oder H.265" />
+    <lang id="en" value="The camera reports no video profile with H.264 or H.265" />
+  </text>
+  <text key="#99-2_query_error" default="Abfrage nicht möglich">
+    <lang id="de" value="Abfrage nicht möglich" />
+    <lang id="en" value="Query failed" />
+  </text>
+  <text key="#99-2_res_small" default="Quadrant">
+    <lang id="de" value="Quadrant" />
+    <lang id="en" value="Quadrant" />
+  </text>
+  <text key="#99-2_res_full" default="Vollbild">
+    <lang id="de" value="Vollbild" />
+    <lang id="en" value="Full screen" />
+  </text>
+  <text key="#99-2_res_profiles" default="Profile">
+    <lang id="de" value="Profile" />
+    <lang id="en" value="profiles" />
+  </text>
+  <text key="#99-2_no_cams" default="Keine Kamera angelegt.">
+    <lang id="de" value="Keine Kamera angelegt." />
+    <lang id="en" value="No camera configured." />
+  </text>
+  <text key="#99-2_no_source" default="keine RTSP-, MJPEG- oder Einzelbild-Adresse eingetragen.">
+    <lang id="de" value="keine RTSP-, MJPEG- oder Einzelbild-Adresse eingetragen." />
+    <lang id="en" value="no RTSP, MJPEG or snapshot address set." />
+  </text>
+</language>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Camera (RTSP / ONVIF / MJPEG) – Help</title>
+<link rel="stylesheet" href="../../hilfe.css">
+</head>
+<body>
+<header>
+  <span class="tag">QC plugin 99-2</span>
+  <h1>Camera (RTSP / ONVIF / MJPEG)</h1>
+</header>
+
+<p class="lead">Shows network cameras in the Windows QuadClient: RTSP with H.264, MJPEG over HTTP or single images (JPEG).
+Several cameras per quadrant, browse with ◀ ▶, click the image for full screen.</p>
+
+<figure>
+  <img src="../../../docs/img/99-2_kamera_dunkel.png" alt="">
+  <figcaption>The plugin in the QuadClient (drawn sample image): ◀ ▶ to browse, the camera name and, on the right, stream type and resolution.</figcaption>
+</figure>
+
+<h2>Adding a camera</h2>
+<ol class="steps">
+  <li>On the “Quadrants” tab select the entry that uses this plugin.</li>
+  <li>In the <b>sub-elements</b> window click ⊕: a new camera entry appears. Each camera is one entry;
+      their order (arrows ∧ ∨) is the order when browsing.</li>
+  <li>Select the entry. The camera's fields appear below.</li>
+  <li><b>With ONVIF:</b> enter camera address, ONVIF port, user and password, then set
+      “Query camera now (ONVIF)” to “Yes”. The plugin fills in the RTSP addresses and the snapshot address;
+      the outcome is shown in the result field.</li>
+  <li><b>By hand:</b> enter the address directly in the RTSP address for the quadrant (and, if needed, the full-screen RTSP,
+      MJPEG and snapshot addresses). User and password belong in their own fields, not in the address.</li>
+  <li>Transfer the project and restart the QuadClient.</li>
+</ol>
+
+<figure>
+  <div class="mock">
+    <div class="bar">Sub-elements [Cameras]</div>
+    <div class="tools"><span class="hl">⊕</span><span class="pin">2</span> ⊗ ∧ ∨</div>
+    <div class="list"><div class="sel">Driveway <span class="pin">3</span></div><div>Garden</div></div>
+    <div class="bar">Camera</div>
+    <div class="grid">
+      <div>Name</div><div>Driveway</div>
+      <div>Camera address</div><div>192.168.1.20</div>
+      <div>ONVIF port</div><div>80</div>
+      <div>User</div><div>viewer</div>
+      <div>Password</div><div>••••••••</div>
+      <div>Query camera now (ONVIF)</div><div class="hl">Yes <span class="pin">4</span></div>
+      <div>Query result</div><div>Quadrant: H264 640×360 – full screen: H264 1920×1080</div>
+      <div>Image source</div><div>Automatic</div>
+      <div>RTSP address quadrant</div><div class="hl">rtsp://192.168.1.20:554/Streaming/Channels/102 <span class="pin">5</span></div>
+      <div>RTSP address full screen</div><div>rtsp://192.168.1.20:554/Streaming/Channels/101</div>
+      <div>CO show camera (DPT 1.x)</div><div>Door bell</div>
+    </div>
+  </div>
+  <figcaption>What it looks like in the Experte (redrawn, with sample values). The numbers refer to the steps above.</figcaption>
+</figure>
+
+<h2>Fields</h2>
+<table>
+  <tr><th style="width:34%">Field</th><th>Meaning</th></tr>
+  <tr><td>Name</td><td>Camera name shown in the bar below the image.</td></tr>
+  <tr><td>Camera address, ONVIF port</td><td>IP address or name and port of the ONVIF service (usually 80). Only used for the query in the Experte.</td></tr>
+  <tr><td>User, password</td><td>Login for ONVIF, RTSP and HTTP.</td></tr>
+  <tr><td>Query camera now (ONVIF)</td><td>“Yes” starts the query; the field then returns to “No”.</td></tr>
+  <tr><td>Image source</td><td>Automatic = RTSP if entered, otherwise MJPEG, otherwise single images. Or one of the three.</td></tr>
+  <tr><td>RTSP address quadrant</td><td>Small stream (H.264, about 640 × 360) for the quadrant.</td></tr>
+  <tr><td>RTSP address full screen</td><td>Large stream for full screen. Empty = same as quadrant.</td></tr>
+  <tr><td>MJPEG address</td><td><code>http://…</code> or <code>https://…</code> of an MJPEG stream.</td></tr>
+  <tr><td>Snapshot address</td><td><code>http://…</code> or <code>https://…</code> of a JPEG image.</td></tr>
+  <tr><td>Snapshot interval [ms]</td><td>100 … 60000, single images only.</td></tr>
+  <tr><td>CO show camera (DPT 1.x)</td><td>Drag a communication object from the project onto the field. A value other than 0 (door bell, motion detector) switches to this camera.</td></tr>
+</table>
+
+<h2>Common RTSP addresses</h2>
+<table class="urls">
+  <tr><th style="width:13%">Vendor</th><th>Large stream</th><th>Small stream</th></tr>
+  <tr><td>Axis</td><td><code>rtsp://IP/axis-media/media.amp</code></td><td><code>rtsp://IP/axis-media/media.amp?resolution=640x360</code></td></tr>
+  <tr><td>Hikvision</td><td><code>rtsp://IP:554/Streaming/Channels/101</code></td><td><code>rtsp://IP:554/Streaming/Channels/102</code></td></tr>
+  <tr><td>Dahua</td><td><code>rtsp://IP:554/cam/realmonitor?channel=1&amp;subtype=0</code></td><td><code>rtsp://IP:554/cam/realmonitor?channel=1&amp;subtype=1</code></td></tr>
+</table>
+<p>Addresses may differ by model and firmware; the ONVIF query returns the correct ones.
+The stream must be set to <b>H.264</b> in the camera (H.265 is untested and needs the Windows “HEVC Video Extensions”).</p>
+
+<h2>Axis cameras with current AXIS OS</h2>
+<p>Tested with an AXIS P1468-LE (4K). Three things differ from what you might expect; all of them are in the camera's web
+interface under <b>System → ONVIF</b>.</p>
+<ol class="steps">
+  <li><b>Create an ONVIF account.</b> On Axis, ONVIF has its own accounts; the camera's normal login does not apply.
+      Under “ONVIF accounts” click “Add account”, set name and password and enter both in the Experte as user and
+      password. The same account is used for the RTSP stream.</li>
+  <li><b>Create a small media profile.</b> By default there is only one full-resolution profile per codec
+      (e.g. “profile_1 h264” with 3840 × 2160). Under “ONVIF media profiles” click “Add media profile” and create a
+      profile with <b>H.264</b> and about <b>1280 × 720</b>. For full screen another one with 1920 × 1080 is usually enough.</li>
+  <li><b>Query in the Experte.</b> Set “Query camera now (ONVIF)” to “Yes”. The plugin takes the smallest H.264 profile
+      from 640 pixels width for the quadrant and the largest for full screen. Repeat the query after every change to the
+      profiles in the camera.</li>
+</ol>
+<div class="note"><b>HTTPS only:</b> Current Axis cameras often allow HTTPS only, port 80 is then closed. The ONVIF port can
+still stay at 80 – if the camera does not answer there, the plugin queries over HTTPS by itself. The snapshot address is
+then entered with <code>https://</code> as well.</div>
+<p>It also works without a small profile: the quadrant then receives the full stream and scales it down. On a powerful PC
+that is smooth, but it costs CPU and network load for nothing – on a wall panel, create the small profile.</p>
+
+<h2>Notes</h2>
+<ul>
+  <li class="note">User and password are stored readable in the project and on the HomeServer. Create a separate view-only user
+      in the camera. On Hikvision and Dahua, ONVIF must be enabled and an ONVIF user created.</li>
+  <li>The plugin runs in the Windows QuadClient only. Gira's apps for iOS, Android and G1 do not load third-party plugins.</li>
+  <li>If there is no image, the reason is shown over the image and in the QuadClient's <code>error.log</code> (lines with “Kamera 99-2”).
+      The plugin reconnects by itself after errors.</li>
+  <li>Not included: pan/tilt/zoom, quad view, audio, RTP over UDP, <code>rtsps://</code>.</li>
+</ul>
+<footer>Independent project, not by Gira and not supported by Gira · github.com/BadSmiley0815/QC-Plugin · licence GPL-3.0</footer>
+</body>
+</html>

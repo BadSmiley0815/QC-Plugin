@@ -2,7 +2,7 @@
 <plugin>
   <header>
     <id>99-1</id>
-    <version>0.1.6</version>
+    <version>0.1.8</version>
     <name>#99-1_pluginname</name>
     <manufacturer>Roman by KNXUF</manufacturer>
     <contact>https://github.com/BadSmiley0815/QC-Plugin</contact>

@@ -1,0 +1,60 @@
+/* Gemeinsames Aussehen der Hilfe aller Plugins (plugins\<Plugin>\help\*.html, von build.ps1 als PDF gedruckt). */
+@page { size: A4; margin: 14mm 15mm 16mm; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html { background: #fff; }
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10pt; line-height: 1.45; color: #1c2430; margin: 0 auto; max-width: 180mm; }
+
+header { background: #1b2a3a; color: #fff; border-radius: 6pt; padding: 12pt 16pt 13pt; margin-bottom: 10pt; border-left: 6pt solid #f28c28; }
+header .tag { display: inline-block; background: #f28c28; color: #1b2a3a; font-weight: 700; font-size: 8pt; letter-spacing: .5pt;
+              text-transform: uppercase; border-radius: 9pt; padding: 1pt 8pt; }
+header h1 { font-size: 19pt; font-weight: 600; margin: 5pt 0 2pt; }
+header p { margin: 0; color: #b9c6d4; font-size: 8.5pt; }
+
+.lead { font-size: 10.5pt; margin: 0 0 8pt; }
+h2 { font-size: 12pt; color: #1b2a3a; margin: 14pt 0 5pt; padding-left: 7pt; border-left: 3pt solid #f28c28; page-break-after: avoid; }
+p, ul { margin: 4pt 0; }
+ul { padding-left: 14pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, monospace; font-size: 8.8pt; background: #eef1f5; border-radius: 2pt; padding: 0 2pt; word-break: break-all; }
+
+/* Bild mit Unterschrift */
+figure { margin: 8pt 0 10pt; text-align: center; page-break-inside: avoid; }
+figure img { width: 118mm; border-radius: 5pt; border: 1px solid #c9d1da; box-shadow: 0 2pt 6pt rgba(0,0,0,.18); }
+figcaption { font-size: 8.5pt; color: #5b6878; margin-top: 4pt; }
+
+/* Schritte mit runden Nummern */
+ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 6pt 0; }
+ol.steps > li { counter-increment: s; position: relative; padding: 1pt 0 1pt 22pt; margin: 4pt 0; page-break-inside: avoid; }
+ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 1pt; width: 15pt; height: 15pt; border-radius: 50%;
+                        background: #1b2a3a; color: #fff; font-size: 8.5pt; font-weight: 700; text-align: center; line-height: 15pt; }
+
+table { border-collapse: collapse; width: 100%; margin: 6pt 0; font-size: 9.5pt; }
+th { background: #1b2a3a; color: #fff; font-weight: 600; text-align: left; padding: 4pt 6pt; }
+td { padding: 3.5pt 6pt; vertical-align: top; border-bottom: 1px solid #d5dbe2; }
+tr:nth-child(odd) td { background: #f5f7fa; }
+td:first-child { font-weight: 600; }
+tr { page-break-inside: avoid; }
+
+.note { background: #fff4e5; border-left: 3pt solid #f28c28; border-radius: 3pt; padding: 6pt 9pt; margin: 8pt 0; page-break-inside: avoid; }
+.note b:first-child { color: #b35c00; }
+
+/* Skizze des Experten-Fensters (nachgezeichnet, kein Bildschirmfoto) */
+.mock { width: 150mm; margin: 0 auto; border: 1px solid #9aa5b1; border-radius: 4pt; overflow: hidden; text-align: left;
+        font-size: 8.5pt; box-shadow: 0 2pt 6pt rgba(0,0,0,.15); background: #fff; }
+.mock .bar { background: #c9d9ec; padding: 2.5pt 7pt; font-weight: 600; color: #1b2a3a; border-top: 1px solid #9aa5b1; }
+.mock .bar:first-child { border-top: 0; }
+.mock .tools { padding: 2.5pt 7pt; color: #5b6878; border-bottom: 1px solid #d5dbe2; letter-spacing: 3pt; }
+.mock .list div { padding: 2pt 7pt; }
+.mock .list .sel { background: #cfe3fa; }
+.mock .grid { display: grid; grid-template-columns: 42% 58%; }
+.mock .grid div { padding: 2pt 7pt; border-bottom: 1px solid #e3e7ec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mock .grid div:nth-child(odd) { background: #f1f3f6; border-right: 1px solid #d5dbe2; }
+.mock .grid .grp { grid-column: 1 / 3; background: #dfe4ea !important; font-weight: 700; }
+.mock .hl { outline: 1.5pt solid #f28c28; outline-offset: -1.5pt; }
+.pin { display: inline-block; width: 12pt; height: 12pt; border-radius: 50%; background: #f28c28; color: #fff; font-size: 8pt;
+       font-weight: 700; text-align: center; line-height: 12pt; letter-spacing: 0; margin-left: 4pt; }
+
+footer { margin-top: 14pt; padding-top: 5pt; border-top: 1px solid #d5dbe2; font-size: 8pt; color: #5b6878; }
+
+/* Tabelle mit langen Adressen */
+.urls code { font-size: 7.8pt; word-break: normal; overflow-wrap: anywhere; background: none; padding: 0; }
