@@ -1,5 +1,55 @@
 # Changelog
 
+## 99-3 Energiefluss mit Verbrauchern
+
+### 0.1.3 – 23.11.2026
+
+Erster Versuch im echten Experten (0.1.2): Einrichten in QuadConfig klappte, die Einstellungen der Instanz kamen
+aber nach dem Übertragen leer an (`<project version="1" />`). Die Ursache ist **nicht belegt**; diese Fassung
+schließt die beiden möglichen Wege aus und schreibt mit, was geschieht.
+
+**Geprüft am 23.11.2026 im Experten 4.13 und am HomeServer:** 12 Grund-KOs, 2 Verbraucher und 2 Einzelwerte
+eingerichtet, gespeichert, übertragen – die Datei liegt vollständig (668 Byte) am HomeServer, der QC-Client zeigt
+alles an. Der Fehler von 0.1.2 trat nicht wieder auf; ob das an den Änderungen unten liegt oder daran, dass
+QuadConfig diesmal vor dem Übertragen geschlossen war, ist offen. **Noch nicht** geprüft: Anzeige im Windows-QuadClient.
+
+Aus dem Protokoll: „Übertragen“ startet ein eigenes QuadConfig, das jede Instanz lädt und sofort wieder speichert.
+Was am HomeServer ankommt, ist also das Ergebnis von Laden und erneutem Speichern, nicht die Datei aus der Sitzung.
+
+- Namen: Steuerzeichen und andere in XML unzulässige Zeichen werden entfernt. Ein solches Zeichen ließ bisher das
+  Schreiben der gesamten Einstellungen scheitern (leere Datei).
+- Lässt sich eine gespeicherte Datei nicht lesen, bleibt sie beim nächsten Speichern unverändert erhalten, statt
+  durch leere Einstellungen ersetzt zu werden. Ein Fehler bei einem einzelnen KO oder Eintrag verwirft nicht mehr alles.
+- Protokoll für die Fehlersuche: `%LOCALAPPDATA%\QC-Plugin\99-3\experte.log` – was QuadConfig lädt und speichert
+  (Zeit, Prozess, Instanz, Inhalt mit KO-IDs und Namen).
+
+### 0.1.2 – 23.11.2026
+
+Weiter nur gebaut und mit den eigenen Testprogrammen geprüft.
+
+- Neu: Einzelwerte hinter einem Hauptkreis (`<teil an name tag/>`), z. B. drei Wechselrichter hinter „PV-Anlage“,
+  höchstens 8 je Kreis. Am Kreis zeigt eine Scheibe die Anzahl, ein Klick blendet Namen, Leistungen und Summe ein.
+  Der Kreis zeigt weiter den Wert seines eigenen KOs. Anlass: Wunsch aus dem KNX-User-Forum.
+- Verbraucher sind im Experten jetzt eine frei verlängerbare Liste statt 17 fester Plätze (angezeigt werden
+  höchstens 17). Die Kennung (`wb1`, `wm`, `s1` …) vergibt der Experte beim Speichern nach dem Symbol.
+- Der Experte schreibt nur noch angelegte Einträge, nicht mehr immer 17 `<vb>`.
+
+### 0.1.1 – 23.11.2026
+
+Erste Fassung. Gebaut und mit den eigenen Testprogrammen geprüft, **noch nicht im Experten, am HomeServer und im
+QuadClient erprobt**.
+
+- Vorbild: Plugin „Energiefluss“ (180-1) von johannesbonn (KNX-User-Forum). Eigene, unabhängige Entwicklung;
+  aus dem Paket 180-1 ist nichts übernommen. Die zwölf Grund-KOs haben dieselbe Bedeutung.
+- Anzeige im QuadClient (`99-3_client.dll`): PV-Anlage, Speicher, Netz und Haus als Kreise mit laufenden Linien,
+  Fußzeile mit Eigenverbrauch, Autarkie, Einspeisung und Netzbezug; helles und dunkles Design; eigene Symbole.
+- Neu gegenüber dem Vorbild: bis zu 17 Verbraucher (Wallbox 1–4, Waschmaschine, Spülmaschine, Trockner,
+  Verbraucher 1–10) mit Name, Symbol (16 zur Wahl), Anschlusspunkt (Haus, PV, Speicher, Netz) und KO der Leistung.
+- Einstellungen im Experten (`plugin_config.dll`): zwölf KO-Felder an der Instanz, die Verbraucher als feste Liste
+  „Unterelemente“ (verschiebbar).
+- Einstellungsformat als dokumentiertes XML (siehe README); der QC-Client liest es unter der Klasse 99-3.
+- Tests: `ConfigTest`, `Vorschau`. Hilfe als PDF (deutsch, englisch).
+
 ## 99-2 Kamera
 
 ### 0.1.4 – 15.11.2026

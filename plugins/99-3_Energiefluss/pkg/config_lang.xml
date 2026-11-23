@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <text key="#99-3_pluginname" default="Energiefluss mit Verbrauchern">
+    <lang id="de" value="Energiefluss mit Verbrauchern" />
+    <lang id="en" value="Energy flow with loads" />
+  </text>
+  <text key="#99-3_title" default="Energiefluss">
+    <lang id="de" value="Energiefluss" />
+    <lang id="en" value="Energy flow" />
+  </text>
+
+  <text key="#99-3_hint" default="Hinweis">
+    <lang id="de" value="Hinweis" />
+    <lang id="en" value="Note" />
+  </text>
+  <text key="#99-3_hint_info" default="Kurzanleitung, nur Anzeige.">
+    <lang id="de" value="Kurzanleitung, nur Anzeige." />
+    <lang id="en" value="Short instructions, display only." />
+  </text>
+  <text key="#99-3_hint_text" default="KOs aus dem Projekt auf die Felder ziehen. Verbraucher und Einzelwerte (z. B. mehrere Wechselrichter): in der Liste „Unterelemente“ mit ⊕ anlegen.">
+    <lang id="de" value="KOs aus dem Projekt auf die Felder ziehen. Verbraucher und Einzelwerte (z. B. mehrere Wechselrichter): in der Liste „Unterelemente“ mit ⊕ anlegen." />
+    <lang id="en" value="Drag communication objects from the project onto the fields. Loads and single values (e.g. several inverters): add them with ⊕ in the “sub-elements” list." />
+  </text>
+  <text key="#99-3_credit" default="Vorbild">
+    <lang id="de" value="Vorbild" />
+    <lang id="en" value="Based on" />
+  </text>
+  <text key="#99-3_credit_info" default="Idee und Vorbild der Anzeige. Dieses Plugin ist eine eigene, unabhängige Entwicklung.">
+    <lang id="de" value="Idee und Vorbild der Anzeige. Dieses Plugin ist eine eigene, unabhängige Entwicklung." />
+    <lang id="en" value="Idea and model for the display. This plugin is a separate, independent development." />
+  </text>
+  <text key="#99-3_credit_text" default="Plugin „Energiefluss“ (180-1) von johannesbonn, KNX-User-Forum">
+    <lang id="de" value="Plugin „Energiefluss“ (180-1) von johannesbonn, KNX-User-Forum" />
+    <lang id="en" value="Plugin “Energiefluss” (180-1) by johannesbonn, KNX-User-Forum" />
+  </text>
+
+  <text key="#99-3_ko_pv" default="KO PV-Leistung [W]">
+    <lang id="de" value="KO PV-Leistung [W]" />
+    <lang id="en" value="CO PV power [W]" />
+  </text>
+  <text key="#99-3_ko_pv_info" default="Aktuelle Leistung der PV-Anlage in W (DPT 9 oder 14). Größer 0: Linie PV → Haus.">
+    <lang id="de" value="Aktuelle Leistung der PV-Anlage in W (DPT 9 oder 14). Größer 0: Linie PV → Haus." />
+    <lang id="en" value="Current PV power in W (DPT 9 or 14). Above 0: line PV → house." />
+  </text>
+  <text key="#99-3_ko_bat" default="KO Speicher-Leistung [W]">
+    <lang id="de" value="KO Speicher-Leistung [W]" />
+    <lang id="en" value="CO battery power [W]" />
+  </text>
+  <text key="#99-3_ko_bat_info" default="Lade- oder Entladeleistung des Speichers in W (DPT 9 oder 14). Angezeigt wird der Betrag; die Richtung kommt vom KO Speicher-Zustand.">
+    <lang id="de" value="Lade- oder Entladeleistung des Speichers in W (DPT 9 oder 14). Angezeigt wird der Betrag; die Richtung kommt vom KO Speicher-Zustand." />
+    <lang id="en" value="Charging or discharging power of the battery in W (DPT 9 or 14). The absolute value is shown; the direction comes from the battery state CO." />
+  </text>
+  <text key="#99-3_ko_haus" default="KO Hausverbrauch [W]">
+    <lang id="de" value="KO Hausverbrauch [W]" />
+    <lang id="en" value="CO house consumption [W]" />
+  </text>
+  <text key="#99-3_ko_haus_info" default="Aktueller Verbrauch des Hauses in W (DPT 9 oder 14).">
+    <lang id="de" value="Aktueller Verbrauch des Hauses in W (DPT 9 oder 14)." />
+    <lang id="en" value="Current consumption of the house in W (DPT 9 or 14)." />
+  </text>
+  <text key="#99-3_ko_netz" default="KO Netz-Leistung [W]">
+    <lang id="de" value="KO Netz-Leistung [W]" />
+    <lang id="en" value="CO grid power [W]" />
+  </text>
+  <text key="#99-3_ko_netz_info" default="Leistung am Netzanschluss in W (DPT 9 oder 14): positiv = Einspeisung, negativ = Bezug.">
+    <lang id="de" value="Leistung am Netzanschluss in W (DPT 9 oder 14): positiv = Einspeisung, negativ = Bezug." />
+    <lang id="en" value="Power at the grid connection in W (DPT 9 or 14): positive = feed-in, negative = import." />
+  </text>
+  <text key="#99-3_ko_soc" default="KO Speicher-Ladestand [%]">
+    <lang id="de" value="KO Speicher-Ladestand [%]" />
+    <lang id="en" value="CO battery state of charge [%]" />
+  </text>
+  <text key="#99-3_ko_soc_info" default="Ladestand des Speichers in Prozent (0 … 100), steht im Kreis des Speichers.">
+    <lang id="de" value="Ladestand des Speichers in Prozent (0 … 100), steht im Kreis des Speichers." />
+    <lang id="en" value="State of charge in percent (0 … 100), shown in the battery circle." />
+  </text>
+  <text key="#99-3_ko_batstate" default="KO Speicher-Zustand (1 = lädt, 2 = entlädt)">
+    <lang id="de" value="KO Speicher-Zustand (1 = lädt, 2 = entlädt)" />
+    <lang id="en" value="CO battery state (1 = charging, 2 = discharging)" />
+  </text>
+  <text key="#99-3_ko_batstate_info" default="1 = Speicher lädt, 2 = Speicher entlädt, jeder andere Wert = Ruhe. Ohne dieses KO gibt es keine Linie zwischen Speicher und Haus.">
+    <lang id="de" value="1 = Speicher lädt, 2 = Speicher entlädt, jeder andere Wert = Ruhe. Ohne dieses KO gibt es keine Linie zwischen Speicher und Haus." />
+    <lang id="en" value="1 = charging, 2 = discharging, any other value = idle. Without this CO there is no line between battery and house." />
+  </text>
+  <text key="#99-3_ko_pvkwh" default="KO PV-Ertrag heute [kWh]">
+    <lang id="de" value="KO PV-Ertrag heute [kWh]" />
+    <lang id="en" value="CO PV yield today [kWh]" />
+  </text>
+  <text key="#99-3_ko_pvkwh_info" default="Ertrag der PV-Anlage heute in kWh, steht im Kreis der PV-Anlage.">
+    <lang id="de" value="Ertrag der PV-Anlage heute in kWh, steht im Kreis der PV-Anlage." />
+    <lang id="en" value="PV yield today in kWh, shown in the PV circle." />
+  </text>
+  <text key="#99-3_ko_evkwh" default="KO Verbrauch heute [kWh]">
+    <lang id="de" value="KO Verbrauch heute [kWh]" />
+    <lang id="en" value="CO consumption today [kWh]" />
+  </text>
+  <text key="#99-3_ko_evkwh_info" default="Verbrauch des Hauses heute in kWh, steht im Kreis des Hauses.">
+    <lang id="de" value="Verbrauch des Hauses heute in kWh, steht im Kreis des Hauses." />
+    <lang id="en" value="House consumption today in kWh, shown in the house circle." />
+  </text>
+  <text key="#99-3_ko_evpct" default="KO Eigenverbrauch [%]">
+    <lang id="de" value="KO Eigenverbrauch [%]" />
+    <lang id="en" value="CO self-consumption [%]" />
+  </text>
+  <text key="#99-3_ko_evpct_info" default="Eigenverbrauchsquote in Prozent, steht in der Fußzeile.">
+    <lang id="de" value="Eigenverbrauchsquote in Prozent, steht in der Fußzeile." />
+    <lang id="en" value="Self-consumption rate in percent, shown in the footer." />
+  </text>
+  <text key="#99-3_ko_autpct" default="KO Autarkie [%]">
+    <lang id="de" value="KO Autarkie [%]" />
+    <lang id="en" value="CO self-sufficiency [%]" />
+  </text>
+  <text key="#99-3_ko_autpct_info" default="Autarkiegrad in Prozent, steht in der Fußzeile.">
+    <lang id="de" value="Autarkiegrad in Prozent, steht in der Fußzeile." />
+    <lang id="en" value="Degree of self-sufficiency in percent, shown in the footer." />
+  </text>
+  <text key="#99-3_ko_einsp" default="KO Einspeisung heute [kWh]">
+    <lang id="de" value="KO Einspeisung heute [kWh]" />
+    <lang id="en" value="CO feed-in today [kWh]" />
+  </text>
+  <text key="#99-3_ko_einsp_info" default="Eingespeiste Energie in kWh, steht in der Fußzeile.">
+    <lang id="de" value="Eingespeiste Energie in kWh, steht in der Fußzeile." />
+    <lang id="en" value="Energy fed into the grid in kWh, shown in the footer." />
+  </text>
+  <text key="#99-3_ko_bezug" default="KO Netzbezug heute [kWh]">
+    <lang id="de" value="KO Netzbezug heute [kWh]" />
+    <lang id="en" value="CO grid import today [kWh]" />
+  </text>
+  <text key="#99-3_ko_bezug_info" default="Aus dem Netz bezogene Energie in kWh, steht in der Fußzeile.">
+    <lang id="de" value="Aus dem Netz bezogene Energie in kWh, steht in der Fußzeile." />
+    <lang id="en" value="Energy drawn from the grid in kWh, shown in the footer." />
+  </text>
+
+  <text key="#99-3_entry_title" default="Verbraucher / Einzelwert">
+    <lang id="de" value="Verbraucher / Einzelwert" />
+    <lang id="en" value="Load / single value" />
+  </text>
+  <text key="#99-3_kind" default="Art">
+    <lang id="de" value="Art" />
+    <lang id="en" value="Kind" />
+  </text>
+  <text key="#99-3_kind_info" default="Verbraucher = eigener kleiner Kreis mit Symbol (höchstens 17). Einzelwert = Zeile hinter einem Hauptkreis, z. B. ein Wechselrichter hinter der PV-Anlage; ein Klick auf den Kreis blendet die Einzelwerte ein (höchstens 8 je Kreis).">
+    <lang id="de" value="Verbraucher = eigener kleiner Kreis mit Symbol (höchstens 17). Einzelwert = Zeile hinter einem Hauptkreis, z. B. ein Wechselrichter hinter der PV-Anlage; ein Klick auf den Kreis blendet die Einzelwerte ein (höchstens 8 je Kreis)." />
+    <lang id="en" value="Load = its own small circle with a symbol (17 at most). Single value = a row behind a main circle, e.g. an inverter behind the PV system; a click on the circle shows the single values (8 per circle at most)." />
+  </text>
+  <text key="#99-3_kind_vb" default="Verbraucher">
+    <lang id="de" value="Verbraucher" />
+    <lang id="en" value="Load" />
+  </text>
+  <text key="#99-3_kind_teil" default="Einzelwert">
+    <lang id="de" value="Einzelwert" />
+    <lang id="en" value="Single value" />
+  </text>
+  <text key="#99-3_vb_name" default="Name">
+    <lang id="de" value="Name" />
+    <lang id="en" value="Name" />
+  </text>
+  <text key="#99-3_vb_name_info" default="Verbraucher: Name unter dem Symbol, etwa zehn Zeichen passen; leer = Vorgabe nach dem Symbol (Wallbox 1, Waschmaschine, Verbraucher 1 …). Einzelwert: Name der Zeile; leer = „Wechselrichter 1“, „Speicher 1“, „Zähler 1“ oder „Bereich 1“.">
+    <lang id="de" value="Verbraucher: Name unter dem Symbol, etwa zehn Zeichen passen; leer = Vorgabe nach dem Symbol (Wallbox 1, Waschmaschine, Verbraucher 1 …). Einzelwert: Name der Zeile; leer = „Wechselrichter 1“, „Speicher 1“, „Zähler 1“ oder „Bereich 1“." />
+    <lang id="en" value="Load: name below the symbol, about ten characters fit; empty = default by symbol (Wallbox 1, Washing machine, Load 1 …). Single value: name of the row; empty = “Inverter 1”, “Battery 1”, “Meter 1” or “Area 1”." />
+  </text>
+  <text key="#99-3_vb_icon" default="Symbol (nur Verbraucher)">
+    <lang id="de" value="Symbol (nur Verbraucher)" />
+    <lang id="en" value="Symbol (loads only)" />
+  </text>
+  <text key="#99-3_vb_icon_info" default="Symbol im Kreis des Verbrauchers. Bei Einzelwerten ohne Bedeutung.">
+    <lang id="de" value="Symbol im Kreis des Verbrauchers. Bei Einzelwerten ohne Bedeutung." />
+    <lang id="en" value="Symbol in the load's circle. Has no meaning for single values." />
+  </text>
+  <text key="#99-3_vb_an" default="Anschlusspunkt / Kreis">
+    <lang id="de" value="Anschlusspunkt / Kreis" />
+    <lang id="en" value="Connection point / circle" />
+  </text>
+  <text key="#99-3_vb_an_info" default="Verbraucher: Von hier läuft die Linie zum Verbraucher, in der Regel das Haus. Einzelwert: der Hauptkreis, hinter dem die Zeile steht.">
+    <lang id="de" value="Verbraucher: Von hier läuft die Linie zum Verbraucher, in der Regel das Haus. Einzelwert: der Hauptkreis, hinter dem die Zeile steht." />
+    <lang id="en" value="Load: the line to the load starts here, usually the house. Single value: the main circle the row belongs to." />
+  </text>
+  <text key="#99-3_vb_ko" default="KO Leistung [W]">
+    <lang id="de" value="KO Leistung [W]" />
+    <lang id="en" value="CO power [W]" />
+  </text>
+  <text key="#99-3_vb_ko_info" default="Leistung in W (DPT 9 oder 14). Ohne KO wird der Eintrag nicht angezeigt. Verbraucher mit negativem Wert: Fluss zurück zum Anschlusspunkt.">
+    <lang id="de" value="Leistung in W (DPT 9 oder 14). Ohne KO wird der Eintrag nicht angezeigt. Verbraucher mit negativem Wert: Fluss zurück zum Anschlusspunkt." />
+    <lang id="en" value="Power in W (DPT 9 or 14). Without a CO the entry is not shown. Load with a negative value: flow back to the connection point." />
+  </text>
+  <text key="#99-3_too_many_vb" default="Mehr als 17 Verbraucher mit KO – die weiteren werden nicht angezeigt.">
+    <lang id="de" value="Mehr als 17 Verbraucher mit KO – die weiteren werden nicht angezeigt." />
+    <lang id="en" value="More than 17 loads with a CO – the others are not shown." />
+  </text>
+  <text key="#99-3_too_many_teil" default="Mehr als 8 Einzelwerte an einem Kreis – die weiteren werden nicht angezeigt">
+    <lang id="de" value="Mehr als 8 Einzelwerte an einem Kreis – die weiteren werden nicht angezeigt" />
+    <lang id="en" value="More than 8 single values at one circle – the others are not shown" />
+  </text>
+
+  <text key="#99-3_icon_wallbox" default="Wallbox">
+    <lang id="de" value="Wallbox" />
+    <lang id="en" value="Wallbox" />
+  </text>
+  <text key="#99-3_icon_auto" default="Auto">
+    <lang id="de" value="Auto" />
+    <lang id="en" value="Car" />
+  </text>
+  <text key="#99-3_icon_wasch" default="Waschmaschine">
+    <lang id="de" value="Waschmaschine" />
+    <lang id="en" value="Washing machine" />
+  </text>
+  <text key="#99-3_icon_spuel" default="Spülmaschine">
+    <lang id="de" value="Spülmaschine" />
+    <lang id="en" value="Dishwasher" />
+  </text>
+  <text key="#99-3_icon_trockner" default="Trockner">
+    <lang id="de" value="Trockner" />
+    <lang id="en" value="Dryer" />
+  </text>
+  <text key="#99-3_icon_herd" default="Herd">
+    <lang id="de" value="Herd" />
+    <lang id="en" value="Cooker" />
+  </text>
+  <text key="#99-3_icon_kuehl" default="Kühlschrank">
+    <lang id="de" value="Kühlschrank" />
+    <lang id="en" value="Fridge" />
+  </text>
+  <text key="#99-3_icon_wp" default="Wärmepumpe">
+    <lang id="de" value="Wärmepumpe" />
+    <lang id="en" value="Heat pump" />
+  </text>
+  <text key="#99-3_icon_boiler" default="Warmwasser / Heizstab">
+    <lang id="de" value="Warmwasser / Heizstab" />
+    <lang id="en" value="Hot water / heating rod" />
+  </text>
+  <text key="#99-3_icon_klima" default="Klimaanlage">
+    <lang id="de" value="Klimaanlage" />
+    <lang id="en" value="Air conditioning" />
+  </text>
+  <text key="#99-3_icon_licht" default="Licht">
+    <lang id="de" value="Licht" />
+    <lang id="en" value="Light" />
+  </text>
+  <text key="#99-3_icon_steckdose" default="Steckdose">
+    <lang id="de" value="Steckdose" />
+    <lang id="en" value="Socket" />
+  </text>
+  <text key="#99-3_icon_pool" default="Pool">
+    <lang id="de" value="Pool" />
+    <lang id="en" value="Pool" />
+  </text>
+  <text key="#99-3_icon_tv" default="Fernseher">
+    <lang id="de" value="Fernseher" />
+    <lang id="en" value="TV" />
+  </text>
+  <text key="#99-3_icon_pc" default="Computer">
+    <lang id="de" value="Computer" />
+    <lang id="en" value="Computer" />
+  </text>
+  <text key="#99-3_icon_sonst" default="Sonstiges (Stecker)">
+    <lang id="de" value="Sonstiges (Stecker)" />
+    <lang id="en" value="Other (plug)" />
+  </text>
+
+  <text key="#99-3_an_haus" default="Haus">
+    <lang id="de" value="Haus" />
+    <lang id="en" value="House" />
+  </text>
+  <text key="#99-3_an_pv" default="PV-Anlage">
+    <lang id="de" value="PV-Anlage" />
+    <lang id="en" value="PV system" />
+  </text>
+  <text key="#99-3_an_bat" default="Speicher">
+    <lang id="de" value="Speicher" />
+    <lang id="en" value="Battery" />
+  </text>
+  <text key="#99-3_an_netz" default="Netz">
+    <lang id="de" value="Netz" />
+    <lang id="en" value="Grid" />
+  </text>
+
+  <text key="#99-3_free" default="(frei)">
+    <lang id="de" value="(frei)" />
+    <lang id="en" value="(unused)" />
+  </text>
+  <text key="#99-3_no_ko" default="Kein KO zugewiesen – die Anzeige bleibt leer.">
+    <lang id="de" value="Kein KO zugewiesen – die Anzeige bleibt leer." />
+    <lang id="en" value="No communication object assigned – the display stays empty." />
+  </text>
+</language>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <class nsclient="QcEnergie.Client.EnergieQuad"
+         nsconfig="QcEnergie.Config.EnergiePlugin"
+         remanent="0" max_instance_count="0" day_night_mode="true"/>
+</plugin>

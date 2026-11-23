@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Energy flow with loads – Help</title>
+<link rel="stylesheet" href="../../hilfe.css">
+</head>
+<body>
+<header>
+  <span class="tag">QC plugin 99-3</span>
+  <h1>Energy flow with loads</h1>
+</header>
+
+<p class="lead">Shows in the Windows QuadClient where the power is flowing right now: PV system, battery, grid and house as
+circles, plus up to 17 individual loads – wallboxes, washing machine, heat pump and whatever else is metered – each with
+its own symbol and connection point. Single values can sit behind each circle, for example three inverters behind the PV system.</p>
+
+<figure>
+  <img src="../../../docs/img/99-3_energiefluss_dunkel.png" alt="">
+  <figcaption>The plugin in the QuadClient with sample data (German labels): moving dashes show the direction, a thin line means “no power”.</figcaption>
+</figure>
+
+<div class="note"><b>Based on:</b> the idea and layout of the display come from the plugin “Energiefluss” (180-1) by
+<b>johannesbonn</b> of the KNX-User-Forum (knx-user-forum.de/member/39809-johannesbonn). This plugin is a separate,
+independent development, because 180-1 cannot be extended with loads; nothing was taken from its package.
+The twelve basic COs have the same meaning, so switching over only means re-assigning the COs.</div>
+
+<h2>Setting up</h2>
+<ol class="steps">
+  <li>On the “Quadrants” tab select the entry that uses this plugin.</li>
+  <li>Drag the communication objects from the project onto the CO fields. All COs are optional; what is missing shows “---” or is left out.</li>
+  <li>For each load, click ⊕ in the <b>sub-elements</b> window, select the new entry and drag the CO of its
+      power onto “CO power [W]”. Change name, symbol and connection point as you like. Entries without a CO are not shown.</li>
+  <li>For single values (several inverters, meters, batteries) add an entry the same way, set “Kind” to “Single value”
+      and choose the main circle under “Connection point / circle”.</li>
+  <li>Transfer the project and restart the QuadClient.</li>
+</ol>
+
+<figure>
+  <div class="mock">
+    <div class="bar">Sub-elements [Energy flow]</div>
+    <div class="tools"><span class="hl">⊕</span><span class="pin">3</span> ⊗ ∧ ∨</div>
+    <div class="list"><div class="sel">Garage</div><div>Washing machine</div><div>PV system › Inverter south <span class="pin">4</span></div><div>PV system › Inverter east/west</div></div>
+    <div class="bar">Load / single value</div>
+    <div class="grid">
+      <div>Kind</div><div>Load</div>
+      <div>Name</div><div>Garage</div>
+      <div>Symbol (loads only)</div><div>Wallbox</div>
+      <div>Connection point / circle</div><div>House</div>
+      <div>CO power [W]</div><div class="hl">Wallbox garage power <span class="pin">3</span></div>
+    </div>
+  </div>
+  <figcaption>A load in the Experte (redrawn, with sample values). The numbers refer to the steps above.</figcaption>
+</figure>
+
+<h2>Basic COs</h2>
+<table>
+  <tr><th style="width:34%">CO</th><th style="width:20%">Value</th><th>Display</th></tr>
+  <tr><td>PV power</td><td>W</td><td>“PV” circle. Above 0: line PV → house.</td></tr>
+  <tr><td>Battery power</td><td>W</td><td>“Battery” circle, the absolute value is shown.</td></tr>
+  <tr><td>House consumption</td><td>W</td><td>“House” circle.</td></tr>
+  <tr><td>Grid power</td><td>W</td><td>“Grid” circle. <b>Positive = feed-in</b> (line PV → grid), <b>negative = import</b> (line grid → house).</td></tr>
+  <tr><td>Battery state of charge</td><td>%</td><td>In the battery circle.</td></tr>
+  <tr><td>Battery state</td><td>1 / 2 / other</td><td>1 = charging (line house → battery), 2 = discharging (battery → house), otherwise idle.
+      Without this CO there is no line to the battery.</td></tr>
+  <tr><td>PV yield today, consumption today</td><td>kWh</td><td>In the PV and house circles.</td></tr>
+  <tr><td>Self-consumption, self-sufficiency</td><td>%</td><td>Footer.</td></tr>
+  <tr><td>Feed-in today, grid import today</td><td>kWh</td><td>Footer.</td></tr>
+</table>
+<p>Power values as DPT 9 or DPT 14 in watts. The plugin converts nothing and builds no sums: every value is shown as the
+HomeServer delivers it.</p>
+
+<h2>Loads</h2>
+<table>
+  <tr><th style="width:34%">Field</th><th>Meaning</th></tr>
+  <tr><td>Kind</td><td>“Load” for its own small circle, “Single value” for a row behind a main circle (see below).</td></tr>
+  <tr><td>Name</td><td>Text below the symbol, about ten characters fit. Empty = default by symbol (Wallbox 1, Washing machine, Load 1 …).</td></tr>
+  <tr><td>Symbol</td><td>Wallbox, car, washing machine, dishwasher, dryer, cooker, fridge, heat pump, hot water/heating rod,
+      air conditioning, light, socket, pool, TV, computer, other.</td></tr>
+  <tr><td>Connection point</td><td>House (usual), PV system, battery or grid: the line to the load starts there.</td></tr>
+  <tr><td>CO power [W]</td><td>Power in watts. 0 = thin line, negative = the dashes run back to the connection point.
+      From 10 kW the display shows kW.</td></tr>
+</table>
+<p>At most 17 loads with a CO are shown. The arrows ∧ ∨ change the order; it decides who sits closer to the connection
+point. Ten loads fit in one row at the house; with more there are two rows without names.</p>
+
+<h2>Single values behind a circle</h2>
+<figure>
+  <img src="../../../docs/img/99-3_energiefluss_einzelwerte.png" alt="">
+  <figcaption>After a click on the PV circle (German labels): the three inverters and their total. A click on the panel closes it.</figcaption>
+</figure>
+<p>A single value is an entry of the kind “Single value”: name, main circle (PV system, battery, grid or house) and the CO of
+its power in watts. A small disc with the count appears at the circle; a click on the circle shows the list.
+Eight per circle at most. Without a name they are called “Inverter 1”, “Battery 1”, “Meter 1” or “Area 1”.</p>
+<p class="note">The circle itself keeps showing the value of its own CO (e.g. “CO PV power”). The total of the single values is
+only shown in the panel; the plugin does not write it into the circle. The HomeServer therefore has to supply the total CO.</p>
+
+<h2>Notes</h2>
+<ul>
+  <li>The plugin runs in the Windows QuadClient only. Gira's apps for iOS, Android and G1 do not load third-party plugins.</li>
+  <li>If no CO is assigned at all, the quadrant shows “Waiting for data”.</li>
+  <li>Errors are written to the QuadClient's <code>error.log</code> (lines with “Energiefluss 99-3”).</li>
+</ul>
+<footer>Independent project, not by Gira and not supported by Gira · based on “Energiefluss” (180-1) by johannesbonn · github.com/BadSmiley0815/QC-Plugin · licence GPL-3.0</footer>
+</body>
+</html>

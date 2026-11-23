@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Energiefluss mit Verbrauchern – Hilfe</title>
+<link rel="stylesheet" href="../../hilfe.css">
+</head>
+<body>
+<header>
+  <span class="tag">QC-Plugin 99-3</span>
+  <h1>Energiefluss mit Verbrauchern</h1>
+</header>
+
+<p class="lead">Zeigt im Windows-QuadClient, wohin der Strom gerade fließt: PV-Anlage, Speicher, Netz und Haus als Kreise,
+dazu bis zu 17 einzelne Verbraucher – Wallboxen, Waschmaschine, Wärmepumpe und was sonst gemessen wird – jeder mit
+eigenem Symbol und Anschlusspunkt. Hinter jedem Kreis können Einzelwerte stehen, etwa drei Wechselrichter hinter der PV-Anlage.</p>
+
+<figure>
+  <img src="../../../docs/img/99-3_energiefluss_dunkel.png" alt="">
+  <figcaption>Anzeige im QuadClient mit Beispieldaten: laufende Striche zeigen die Richtung, ein dünner Strich bedeutet „keine Leistung“.</figcaption>
+</figure>
+
+<div class="note"><b>Vorbild:</b> Idee und Aufbau der Anzeige stammen vom Plugin „Energiefluss“ (180-1) von
+<b>johannesbonn</b> aus dem KNX-User-Forum (knx-user-forum.de/member/39809-johannesbonn). Dieses Plugin ist eine eigene,
+unabhängige Entwicklung, weil sich 180-1 nicht um Verbraucher erweitern lässt; aus dessen Paket ist nichts übernommen.
+Die zwölf Grund-KOs haben dieselbe Bedeutung, ein Umstieg ist also nur ein Umhängen der KOs.</div>
+
+<h2>Einrichten</h2>
+<ol class="steps">
+  <li>Im Reiter „Quadranten“ den Eintrag mit diesem Plugin anwählen.</li>
+  <li>Die KOs aus dem Projekt auf die KO-Felder ziehen. Alle KOs sind freiwillig; was fehlt, zeigt „---“ oder bleibt weg.</li>
+  <li>Für jeden Verbraucher im Fenster <b>„Unterelemente“</b> auf ⊕ klicken, den neuen Eintrag anwählen und das KO seiner
+      Leistung auf „KO Leistung [W]“ ziehen. Name, Symbol und Anschlusspunkt nach Wunsch ändern. Einträge ohne KO werden
+      nicht angezeigt.</li>
+  <li>Für Einzelwerte (mehrere Wechselrichter, Zähler, Speicher) ebenso einen Eintrag anlegen, „Art“ auf „Einzelwert“
+      stellen und bei „Anschlusspunkt / Kreis“ den Hauptkreis wählen.</li>
+  <li>Projekt übertragen und den QuadClient neu starten.</li>
+</ol>
+
+<figure>
+  <div class="mock">
+    <div class="bar">Unterelemente [Energiefluss]</div>
+    <div class="tools"><span class="hl">⊕</span><span class="pin">3</span> ⊗ ∧ ∨</div>
+    <div class="list"><div class="sel">Garage</div><div>Waschmaschine</div><div>PV-Anlage › Wechselrichter Süd <span class="pin">4</span></div><div>PV-Anlage › Wechselrichter Ost/West</div></div>
+    <div class="bar">Verbraucher / Einzelwert</div>
+    <div class="grid">
+      <div>Art</div><div>Verbraucher</div>
+      <div>Name</div><div>Garage</div>
+      <div>Symbol (nur Verbraucher)</div><div>Wallbox</div>
+      <div>Anschlusspunkt / Kreis</div><div>Haus</div>
+      <div>KO Leistung [W]</div><div class="hl">Wallbox Garage Leistung <span class="pin">3</span></div>
+    </div>
+  </div>
+  <figcaption>Ein Verbraucher im Experten (nachgezeichnet, mit Beispielwerten). Die Nummern gehören zu den Schritten oben.</figcaption>
+</figure>
+
+<h2>Grund-KOs</h2>
+<table>
+  <tr><th style="width:34%">KO</th><th style="width:20%">Wert</th><th>Anzeige</th></tr>
+  <tr><td>PV-Leistung</td><td>W</td><td>Kreis „PV-Anlage“. Größer 0: Linie PV → Haus.</td></tr>
+  <tr><td>Speicher-Leistung</td><td>W</td><td>Kreis „Speicher“, angezeigt wird der Betrag.</td></tr>
+  <tr><td>Hausverbrauch</td><td>W</td><td>Kreis „Haus“.</td></tr>
+  <tr><td>Netz-Leistung</td><td>W</td><td>Kreis „Netz“. <b>Positiv = Einspeisung</b> (Linie PV → Netz), <b>negativ = Bezug</b> (Linie Netz → Haus).</td></tr>
+  <tr><td>Speicher-Ladestand</td><td>%</td><td>Im Kreis des Speichers.</td></tr>
+  <tr><td>Speicher-Zustand</td><td>1 / 2 / sonst</td><td>1 = lädt (Linie Haus → Speicher), 2 = entlädt (Speicher → Haus), sonst Ruhe.
+      Ohne dieses KO gibt es keine Linie zum Speicher.</td></tr>
+  <tr><td>PV-Ertrag heute, Verbrauch heute</td><td>kWh</td><td>Im Kreis der PV-Anlage und des Hauses.</td></tr>
+  <tr><td>Eigenverbrauch, Autarkie</td><td>%</td><td>Fußzeile.</td></tr>
+  <tr><td>Einspeisung heute, Netzbezug heute</td><td>kWh</td><td>Fußzeile.</td></tr>
+</table>
+<p>Leistungen als DPT 9 oder DPT 14 in Watt. Das Plugin rechnet nichts um und bildet keine Summen: Jeder Wert kommt so vom
+HomeServer, wie er angezeigt wird.</p>
+
+<h2>Verbraucher</h2>
+<table>
+  <tr><th style="width:34%">Feld</th><th>Bedeutung</th></tr>
+  <tr><td>Art</td><td>„Verbraucher“ für einen eigenen kleinen Kreis, „Einzelwert“ für eine Zeile hinter einem Hauptkreis (siehe unten).</td></tr>
+  <tr><td>Name</td><td>Text unter dem Symbol, etwa zehn Zeichen passen. Leer = Vorgabe nach dem Symbol (Wallbox 1, Waschmaschine, Verbraucher 1 …).</td></tr>
+  <tr><td>Symbol</td><td>Wallbox, Auto, Waschmaschine, Spülmaschine, Trockner, Herd, Kühlschrank, Wärmepumpe, Warmwasser/Heizstab,
+      Klimaanlage, Licht, Steckdose, Pool, Fernseher, Computer, Sonstiges.</td></tr>
+  <tr><td>Anschlusspunkt</td><td>Haus (üblich), PV-Anlage, Speicher oder Netz: Von dort läuft die Linie zum Verbraucher.</td></tr>
+  <tr><td>KO Leistung [W]</td><td>Leistung in Watt. 0 = dünner Strich, negativ = die Striche laufen zurück zum Anschlusspunkt.
+      Ab 10 kW zeigt die Anzeige kW.</td></tr>
+</table>
+<p>Angezeigt werden höchstens 17 Verbraucher mit KO. Die Pfeile ∧ ∨ ändern die Reihenfolge; sie bestimmt, wer näher am
+Anschlusspunkt sitzt. Am Haus haben zehn Verbraucher in einer Reihe Platz, bei mehr werden es zwei Reihen ohne Namen.</p>
+
+<h2>Einzelwerte hinter einem Kreis</h2>
+<figure>
+  <img src="../../../docs/img/99-3_energiefluss_einzelwerte.png" alt="">
+  <figcaption>Nach einem Klick auf „PV-Anlage“: die drei Wechselrichter und ihre Summe. Ein Klick auf das Feld schließt es.</figcaption>
+</figure>
+<p>Ein Einzelwert ist ein Eintrag mit der Art „Einzelwert“: Name, Hauptkreis (PV-Anlage, Speicher, Netz oder Haus) und das KO
+der Leistung in Watt. Am Kreis erscheint eine kleine Scheibe mit der Anzahl; ein Klick auf den Kreis blendet die Liste ein.
+Höchstens acht je Kreis. Ohne Namen heißen sie „Wechselrichter 1“, „Speicher 1“, „Zähler 1“ oder „Bereich 1“.</p>
+<p class="note">Der Kreis selbst zeigt weiter den Wert seines eigenen KOs (z. B. „KO PV-Leistung“). Die Summe der Einzelwerte steht
+nur im eingeblendeten Feld; das Plugin trägt sie nicht in den Kreis ein. Das Summen-KO muss also der HomeServer liefern.</p>
+
+<h2>Hinweise</h2>
+<ul>
+  <li>Das Plugin läuft nur im Windows-QuadClient. Giras Apps für iOS, Android und G1 laden keine fremden Plugins.</li>
+  <li>Sind gar keine KOs zugewiesen, zeigt der Quadrant „Warte auf Daten“.</li>
+  <li>Fehler stehen im <code>error.log</code> des QuadClients (Zeilen mit „Energiefluss 99-3“).</li>
+</ul>
+<footer>Unabhängiges Projekt, nicht von Gira und nicht von Gira unterstützt · Vorbild: „Energiefluss“ (180-1) von johannesbonn · github.com/BadSmiley0815/QC-Plugin · Lizenz GPL-3.0</footer>
+</body>
+</html>

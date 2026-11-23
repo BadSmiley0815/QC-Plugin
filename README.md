@@ -13,6 +13,7 @@ QuadClient-Plugin-SDK, nutzbar im Windows-QuadClient und im [QC-Client](https://
 |---|---|---|
 | 99-1 | Wetter | läuft im Windows-QuadClient (HS+FS Experte 4.13, QuadClient 5.5) – Vorhersage (Open-Meteo) + aktuelle Werte der eigenen Wetterstation (KOs). Download: [`dist/99-1_Wetter.hsp`](dist/99-1_Wetter.hsp) |
 | 99-2 | Kamera | läuft im Windows-QuadClient mit einer Axis-Kamera (weitere Hersteller noch nicht erprobt) – RTSP (H.264/H.265), ONVIF-Abfrage, MJPEG und Einzelbilder. Download: [`dist/99-2_Kamera.hsp`](dist/99-2_Kamera.hsp) |
+| 99-3 | Energiefluss mit Verbrauchern | **im Experten und am HomeServer erprobt, Anzeige im Windows-QuadClient noch nicht** – PV, Speicher, Netz, Haus, bis zu 17 Verbraucher (Wallboxen, Waschmaschine, …) und Einzelwerte hinter jedem Kreis (z. B. mehrere Wechselrichter). Vorbild: „Energiefluss“ (180-1) von johannesbonn. Download: [`dist/99-3_Energiefluss.hsp`](dist/99-3_Energiefluss.hsp) |
 
 ## 99-1 Wetter
 
@@ -159,6 +160,73 @@ ansehen darf. Zertifikate der Kameras werden bei HTTPS nicht geprüft (selbst au
 Die Reihenfolge der `<cam>` ist die Reihenfolge beim Blättern. `<ko id="show">` steht nur bei zugewiesenem KO;
 `tag` ist die KO-ID des HomeServers. Für den QC-Client im Browser sind `jpeg` und `mjpeg` nutzbar, RTSP kann kein Browser.
 
+## 99-3 Energiefluss mit Verbrauchern
+
+![Energiefluss, dunkles Design](docs/img/99-3_energiefluss_dunkel.png)
+
+![Energiefluss, helles Design](docs/img/99-3_energiefluss_hell.png)
+
+Zeigt, wohin der Strom gerade fließt: PV-Anlage, Speicher, Netz und Haus als Kreise, dazu bis zu 17 einzelne
+Verbraucher mit eigenem Symbol und Anschlusspunkt. Hinter jedem Kreis können Einzelwerte stehen, etwa drei Wechselrichter
+hinter der PV-Anlage: Eine Scheibe am Kreis zeigt die Anzahl, ein Klick blendet sie ein. (Die Bilder zeigen Beispieldaten aus
+dem Vorschauprogramm.)
+
+![Energiefluss, Einzelwerte der PV-Anlage](docs/img/99-3_energiefluss_einzelwerte.png)
+
+**Vorbild und Dank:** Idee und Aufbau der Anzeige stammen vom Plugin „Energiefluss“ (180-1) von
+[johannesbonn](https://knx-user-forum.de/member/39809-johannesbonn) aus dem KNX-User-Forum. 99-3 ist eine eigene,
+unabhängige Entwicklung, weil sich 180-1 nicht um Verbraucher erweitern lässt. Aus dem Paket 180-1 ist nichts
+übernommen – keine Dateien, keine Symbole, kein Code; Zeichnung und Symbole sind eigene. Die zwölf Grund-KOs haben
+dieselbe Bedeutung wie dort, ein Umstieg ist also nur ein Umhängen der KOs.
+
+> **Stand:** Einrichten im Experten 4.13, Speichern und Übertragen sind mit 0.1.3 erprobt; die Einstellungen kommen
+> vollständig am HomeServer an (gelesen vom QC-Client). Die Anzeige ist bisher nur mit `Vorschau` gezeichnet –
+> **noch nicht** erprobt: Anzeige und KO-Werte im Windows-QuadClient.
+> Bei 0.1.2 kamen die Einstellungen einmal leer an; die Ursache ist nicht belegt und der Fehler mit 0.1.3 nicht
+> wieder aufgetreten. Zur Fehlersuche schreibt das Plugin im Experten ein Protokoll nach
+> `%LOCALAPPDATA%\QC-Plugin\99-3\experte.log` (enthält KO-IDs und Namen der Einträge).
+
+- **Grund-KOs** (alle freiwillig): PV-, Speicher-, Haus- und Netz-Leistung in W (Netz positiv = Einspeisung,
+  negativ = Bezug), Ladestand in %, Speicher-Zustand (1 = lädt, 2 = entlädt), PV-Ertrag und Verbrauch heute in kWh,
+  Eigenverbrauch und Autarkie in %, Einspeisung und Netzbezug in kWh.
+- **Verbraucher:** frei anlegbar in der Liste „Unterelemente“ des Experten, angezeigt werden höchstens 17. Je
+  Verbraucher Name, Symbol (16 zur Wahl), Anschlusspunkt (Haus, PV, Speicher, Netz) und das KO der Leistung in W.
+  Einträge ohne KO erscheinen nicht.
+- **Einzelwerte:** in derselben Liste mit der Art „Einzelwert“, je Hauptkreis höchstens 8 – Name und KO der Leistung.
+  Der Kreis zeigt weiter den Wert seines eigenen KOs; die Summe der Einzelwerte steht nur im eingeblendeten Feld.
+- **Linien** laufen nur, wenn etwas fließt: PV → Haus, Netz → Haus bei Bezug, PV → Netz bei Einspeisung,
+  Speicher ↔ Haus nach dem Speicher-Zustand. Bei Verbrauchern steht ohne Leistung ein dünner Strich; ein negativer
+  Wert läuft zurück zum Anschlusspunkt.
+- Das Plugin rechnet nichts um und bildet keine Summen.
+
+### Einstellungsformat (Projektdaten)
+
+```xml
+<project version="1">
+  <ko id="pv" tag="1234" />
+  <ko id="netz" tag="1237" />
+  <vb id="wb1" name="Garage" icon="wallbox" an="haus" tag="1250" />
+  <vb id="wm" name="" icon="wasch" an="haus" tag="0" />
+  <teil an="pv" name="Wechselrichter Süd" tag="1260" />
+</project>
+```
+
+| Element / Attribut | Werte | Bedeutung |
+|---|---|---|
+| `ko id` | `pv` `bat` `haus` `netz` `soc` `batstate` `pvkwh` `evkwh` `evpct` `autpct` `einsp` `bezug` | Grund-KO; steht nur bei zugewiesenem KO |
+| `vb id` | `wb1`…`wb4` `wm` `sm` `tr` `s1`… | Gibt nur Vorgabe-Name und -Symbol. Der Experte vergibt sie beim Speichern nach dem Symbol: Wallbox/Auto → `wb1`…`wb4`, die erste Waschmaschine → `wm`, Spülmaschine → `sm`, Trockner → `tr`, alles andere → `s1`, `s2`, … |
+| `vb name` | Text | Anzeigename; leer = Vorgabe der Kennung (Wallbox n, Waschmaschine, Spülmaschine, Trockner, Verbraucher n) |
+| `vb icon` | `wallbox` `auto` `wasch` `spuel` `trockner` `herd` `kuehl` `wp` `boiler` `klima` `licht` `steckdose` `pool` `tv` `pc` `sonst` | Symbol; unbekannt oder leer = Vorgabe des Platzes |
+| `vb an` | `haus` \| `pv` \| `bat` \| `netz` | Anschlusspunkt; unbekannt oder leer = `haus` |
+| `teil an` | `pv` \| `bat` \| `netz` \| `haus` | Hauptkreis, hinter dem der Einzelwert steht; anderes wird übergangen |
+| `teil name` | Text | leer = „Wechselrichter n“ (pv), „Speicher n“ (bat), „Zähler n“ (netz), „Bereich n“ (haus) |
+| `tag` | KO-ID des HomeServers | `0` oder leer = nicht belegt (der Eintrag wird dann nicht gezeigt) |
+
+Gezeigt werden höchstens 17 `<vb>` und je Kreis 8 `<teil>` mit KO. Der Experte schreibt auch Einträge ohne KO (`tag="0"`),
+erst alle `<vb>`, dann alle `<teil>`.
+Die Reihenfolge der `<vb>` ist die der Liste im Experten und bestimmt die Plätze in der Anzeige. Der QC-Client
+(`qc.html`) liest dieses Format unter der Klasse `99-3` und zeichnet dieselbe Anordnung.
+
 ## Bauen
 
 Braucht nur Windows mit .NET Framework 4 (kein Visual Studio, kein SDK) und die eigene Gira-Installation:
@@ -168,7 +236,8 @@ Braucht nur Windows mit .NET Framework 4 (kein Visual Studio, kein SDK) und die 
 ```
 
 Die beiden Pfade sind nur beim ersten Mal nötig (die Bibliotheken werden nach `lib\gira` kopiert, das nicht
-eingecheckt wird). Ergebnis: `dist\99-1_Wetter.hsp` und `dist\99-2_Kamera.hsp`; `-Plugin 99-2` baut nur eines.
+eingecheckt wird). Ergebnis: `dist\99-1_Wetter.hsp`, `dist\99-2_Kamera.hsp` und `dist\99-3_Energiefluss.hsp`;
+`-Plugin 99-2` baut nur eines.
 Jeder Bau erhöht die letzte Stelle der Version in der `version.xml` der gebauten Plugins (`-NoBump` lässt sie
 stehen), prüft die Einstellungen mit `ConfigTest` und zeichnet die Vorschaubilder mit `Vorschau` – ohne Experte
 und HomeServer. `-Live` fragt bei 99-1 wirklich bei Open-Meteo an. Die Hilfe (`plugins\<Plugin>\help\*.html`)
@@ -187,7 +256,7 @@ Das Kennwort wird verdeckt abgefragt und nicht gespeichert; das dekodierte Bild 
    `<assembly path="..\quad_assembly\" />`. **Achtung:** Dann lädt er *alle* Plugin-DLLs aus diesem Ordner –
    dort müssen also auch die `<ID>_client.dll` der übrigen Plugins des Projekts liegen (aus den `.hsp` unter
    `Projekt\qc_hsp\`). `.\build.ps1 -DeployTo <Ordner>` kopiert die eigenen Client-DLLs dorthin.
-3. Fehler der Plugins stehen im `error.log` des QuadClients (Zeilen mit „Wetter 99-1“ bzw. „Kamera 99-2“).
+3. Fehler der Plugins stehen im `error.log` des QuadClients (Zeilen mit „Wetter 99-1“, „Kamera 99-2“ bzw. „Energiefluss 99-3“).
 
 ## Aufbau eines Plugins (.hsp)
 
@@ -220,4 +289,6 @@ Abwandlungen bitte mit eigener Entwickler-ID und angepasster Plugin-ID veröffen
 - Unabhängiges Projekt, **nicht von Gira** und nicht von Gira unterstützt. „Gira“,
   „HomeServer“ und „QuadClient“ sind Marken ihrer Inhaber.
 - Enthält keinen Code, keine Bibliotheken und keine Grafiken von Gira/DaCom.
+- 99-3 folgt in Idee und Aufbau dem Plugin „Energiefluss“ (180-1) von
+  [johannesbonn](https://knx-user-forum.de/member/39809-johannesbonn) (KNX-User-Forum) und enthält nichts aus dessen Paket.
 - Entwickelt mit Claude (Anthropic).

@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Baut die QC-Plugins (99-1 "Wetter", 99-2 "Kamera") und packt sie als dist\<ID>_<Name>.hsp.
+  Baut die QC-Plugins (99-1 "Wetter", 99-2 "Kamera", 99-3 "Energiefluss") und packt sie als dist\<ID>_<Name>.hsp.
 
 .DESCRIPTION
   Braucht weder Visual Studio noch ein .NET SDK: verwendet den C#-Compiler, der zum .NET Framework 4
@@ -35,7 +35,8 @@ $ErrorActionPreference = 'Stop'
 
 $Plugins = @(
     @{ Id = '99-1'; Name = 'Wetter'; Ns = 'QcWetter'; Client = 'Wetter.Client'; Config = 'Wetter.Config' },
-    @{ Id = '99-2'; Name = 'Kamera'; Ns = 'QcKamera'; Client = 'Kamera.Client'; Config = 'Kamera.Config' }
+    @{ Id = '99-2'; Name = 'Kamera'; Ns = 'QcKamera'; Client = 'Kamera.Client'; Config = 'Kamera.Config' },
+    @{ Id = '99-3'; Name = 'Energiefluss'; Ns = 'QcEnergie'; Client = 'Energie.Client'; Config = 'Energie.Config' }
 )
 if ($Plugin) {
     $Plugins = @($Plugins | Where-Object { $_.Id -eq $Plugin -or $_.Name -eq $Plugin })
@@ -192,6 +193,22 @@ using System.Reflection;
             Invoke-Test $Vorschau @((Join-Path $Img "${Id}_kamera_dunkel.png"), 'dark', 'szene', '680', '320') 'Vorschau (Beispielszene)'
             Invoke-Test $Vorschau @((Join-Path $Img "${Id}_kamera_hell.png"), 'light', 'szene', '680', '320') 'Vorschau (Beispielszene hell)'
             foreach ($l in 'de', 'en') { Invoke-Test $Vorschau @((Join-Path $Stage "thumbs\prev_$l.png"), 'dark', 'szene', '681', '319') 'Vorschau (Paketbild)' -Quiet }
+        }
+        if ($Id -eq '99-3') {
+            Invoke-Csc $ConfigTest 'exe' @($RefConfig, "/r:$ConfigDll") @((Join-Path $Tools 'ConfigTest.cs'))
+            Invoke-Csc $Vorschau 'exe' (@($RefClient, "/r:$ClientDll") + $Wpf) @((Join-Path $Tools 'Vorschau.cs'))
+            Write-Host 'Einstellungen im Experten:'
+            Invoke-Test $ConfigTest @($Lang) 'ConfigTest'
+            Invoke-Test $ConfigTest @($Lang, 'roh') 'ConfigTest (ohne Uebersetzung durch den Experten)' -Quiet
+            Write-Host 'Anzeige:'
+            Invoke-Test $Vorschau @((Join-Path $Img "${Id}_energiefluss_dunkel.png"), 'dark', 'sample', '680', '320') 'Vorschau'
+            Invoke-Test $Vorschau @((Join-Path $Img "${Id}_energiefluss_hell.png"), 'light', 'sample', '680', '320') 'Vorschau (hell)'
+            Invoke-Test $Vorschau @((Join-Path $Img "${Id}_energiefluss_einzelwerte.png"), 'dark', 'einzel', '680', '320') 'Vorschau (Einzelwerte)'
+            Invoke-Test $Vorschau @((Join-Path $Obj 'vorschau_einzel_hell.png'), 'light', 'einzel', '680', '320') 'Vorschau (Einzelwerte hell)'
+            Invoke-Test $Vorschau @((Join-Path $Obj 'vorschau_viele.png'), 'dark', 'viele', '680', '320') 'Vorschau (17 Verbraucher)'
+            Invoke-Test $Vorschau @((Join-Path $Obj 'vorschau_ruhe.png'), 'dark', 'ruhe', '680', '320') 'Vorschau (Nacht)'
+            Invoke-Test $Vorschau @((Join-Path $Obj 'vorschau_leer.png'), 'light', 'leer', '680', '320') 'Vorschau (kein KO)'
+            foreach ($l in 'de', 'en') { Invoke-Test $Vorschau @((Join-Path $Stage "thumbs\prev_$l.png"), 'dark', 'sample', '681', '319') 'Vorschau (Paketbild)' -Quiet }
         }
     }
 
